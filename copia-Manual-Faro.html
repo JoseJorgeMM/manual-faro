@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Convivencia Interactivo - Faro del Río</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #0D2F4B;
+            --secondary-color: #1E5A8C;
+            --accent-color: #F2A900;
+            --light-bg: #F4F7F6;
+            --card-bg: #FFFFFF;
+            --text-color: #3A3A3A;
+            --text-muted: #5C5C5C;
+            --border-color: #DDE2E1;
+            --sidebar-width: 290px;
+            --header-height: 80px;
+            --footer-height: 70px;
+            --border-radius: 8px;
+            --box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            --search-highlight-bg: #FFF9C4;
+            --search-highlight-text: #5D4037;
+        }
+
+        body.dark-mode {
+            --light-bg: #1A1A1A;
+            --card-bg: #2C2C2C;
+            --text-color: #E0E0E0;
+            --text-muted: #B0B0B0;
+            --border-color: #4A4A4A;
+            --primary-color: #1E5A8C;
+            --secondary-color: #4DB0D3;
+            --search-highlight-bg: #4A4A4A;
+            --search-highlight-text: #FFF9C4;
+        }
+        body.dark-mode nav.sidebar {
+            background-color: #222222;
+            border-right-color: var(--border-color);
+        }
+        body.dark-mode nav.sidebar ul li a { color: var(--text-muted); }
+        body.dark-mode nav.sidebar ul li a:hover { background-color: #333333; color: white; }
+        body.dark-mode nav.sidebar ul li a.active { background-color: var(--secondary-color); color: white; }
+        body.dark-mode nav.sidebar ul li a.active i,
+        body.dark-mode nav.sidebar ul li a:hover i { color: var(--accent-color); }
+        body.dark-mode nav.sidebar ul li a.active i { color: white; }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            line-height: 1.75;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .page-wrapper { display: flex; flex-grow: 1; padding-top: var(--header-height); }
+
+        header.main-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--header-height);
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+
+        header.main-header .logo-container { display: flex; align-items: center; }
+        header.main-header .logo-img {
+            height: 50px;
+            width: auto;
+            margin-right: 15px;
+            border-radius: var(--border-radius);
+        }
+        header.main-header .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .header-controls { display: flex; align-items: center; }
+        .search-container { margin-right: 1rem; position: relative; }
+        .search-container input[type="search"] {
+            padding: 0.6rem 0.8rem 0.6rem 2.5rem;
+            border: 1px solid #4A6E8A;
+            border-radius: var(--border-radius);
+            background-color: #143D5C;
+            color: white;
+            width: 220px;
+            transition: width 0.3s ease, background-color 0.3s;
+            font-size: 0.9rem;
+        }
+        .search-container input[type="search"]::placeholder { color: #A0B4C8; }
+        .search-container input[type="search"]:focus {
+            width: 280px;
+            background-color: #1E5A8C;
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        .search-container .fa-search {
+            position: absolute; left: 0.8rem; top: 50%;
+            transform: translateY(-50%); color: #A0B4C8;
+        }
+        body.dark-mode .search-container input[type="search"] {
+            border-color: var(--secondary-color); background-color: #3A3A3A;
+        }
+        body.dark-mode .search-container input[type="search"]:focus { background-color: #4A4A4A; }
+
+        .theme-toggle-button {
+            background: none; border: none; color: white;
+            font-size: 1.4rem; cursor: pointer; padding: 0.5rem;
+            margin-right: 0.5rem; transition: color 0.3s;
+        }
+        .theme-toggle-button:hover { color: var(--accent-color); }
+
+        nav.sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--card-bg);
+            padding: 1.8rem 0;
+            height: calc(100vh - var(--header-height));
+            overflow-y: auto;
+            position: fixed; left: 0; top: var(--header-height);
+            transition: transform 0.3s ease-in-out, background-color 0.3s, border-color 0.3s;
+            z-index: 999;
+            border-right: 1px solid var(--border-color);
+        }
+        nav.sidebar ul { list-style-type: none; }
+        nav.sidebar ul li a {
+            display: flex; align-items: center; color: var(--text-muted);
+            padding: 0.85rem 1.8rem; text-decoration: none;
+            font-size: 0.9rem; font-weight: 600;
+            border-left: 5px solid transparent;
+            transition: all 0.25s ease-in-out; letter-spacing: 0.5px;
+        }
+        nav.sidebar ul li a i {
+            margin-right: 15px; width: 22px; text-align: center;
+            color: var(--secondary-color); font-size: 1.1rem;
+            transition: color 0.25s ease-in-out;
+        }
+        nav.sidebar ul li a:hover {
+            background-color: #EFF3F2; color: var(--primary-color);
+            border-left-color: var(--accent-color);
+        }
+        nav.sidebar ul li a:hover i { color: var(--accent-color); }
+        nav.sidebar ul li a.active {
+            background-color: #E6EEF8; border-left-color: var(--primary-color);
+            color: var(--primary-color); font-weight: 700;
+        }
+        nav.sidebar ul li a.active i { color: var(--primary-color); }
+        nav.sidebar ul li.hidden-by-search { display: none !important; }
+
+        main.content-area {
+            flex-grow: 1; padding: 2.5rem 3rem;
+            margin-left: var(--sidebar-width);
+            background-color: var(--light-bg);
+            min-height: calc(100vh - var(--header-height) - var(--footer-height));
+            transition: background-color 0.3s;
+        }
+
+        .content-section {
+            display: none; 
+            animation: slideUpFadeIn 0.6s ease-out;
+        }
+        /* Estilo general para secciones que no son la presentación */
+        .content-section:not(#presentacion) {
+            background-color: var(--card-bg);
+            padding: 2.5rem; 
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: background-color 0.3s;
+        }
+
+        .content-section.active { display: block; }
+        .content-section mark.search-highlight {
+            background-color: var(--search-highlight-bg);
+            color: var(--search-highlight-text);
+            padding: 0.1em 0.2em; border-radius: 3px; font-weight: bold;
+        }
+
+        @keyframes slideUpFadeIn { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* --- ESTILOS MEJORADOS PARA LA SECCIÓN DE PRESENTACIÓN --- */
+        #presentacion {
+            padding: 0; /* Quitamos padding general para dar estilo propio a sus hijos */
+            background-color: transparent; /* Hacemos transparente el contenedor principal de la sección */
+            box-shadow: none;
+        }
+
+        .presentation-hero {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 2.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        body.dark-mode .presentation-hero {
+             background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        }
+
+        .presentation-image-container {
+            flex: 0 0 35%; /* Ajusta según el tamaño de tu imagen */
+            margin-right: 2.5rem;
+            text-align: center; /* Centra la imagen si es más pequeña que el contenedor */
+        }
+        .presentation-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            object-fit: cover; /* Para asegurar que la imagen cubra bien si es vertical */
+            max-height: 400px; /* Limita la altura para imágenes muy verticales */
+        }
+
+        .presentation-text-container {
+            flex: 1;
+        }
+        .presentation-text-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem; /* Más grande para el título de bienvenida */
+            color: white; /* Color del título */
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        .presentation-text-container h2 i {
+            margin-right: 15px;
+            font-size: 2.5rem; /* Icono más grande */
+            color: var(--accent-color); /* Icono del color de acento */
+        }
+        .presentation-text-container p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #E0E7EF; /* Un blanco ligeramente más suave */
+        }
+        .presentation-text-container p strong.highlight-rule {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.2em 0.4em;
+        }
+        body.dark-mode .presentation-text-container p {
+            color: #E0E7EF;
+        }
+        body.dark-mode .presentation-text-container p strong.highlight-rule {
+            background-color: rgba(0,0,0,0.2);
+            color: var(--accent-color);
+        }
+
+
+        .presentation-details {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            color: var(--text-color);
+        }
+         .presentation-details h4 { /* Asegura que los h4 dentro de details tengan el estilo normal */
+            font-family: 'Nunito Sans', sans-serif; color: var(--primary-color);
+            font-size: 1.25rem; margin-top: 1.8rem; margin-bottom: 1rem;
+            font-weight: 700; transition: color 0.3s;
+        }
+        .presentation-details p, .presentation-details ul {
+             color: var(--text-color);
+        }
+        /* --- FIN ESTILOS MEJORADOS PRESENTACIÓN --- */
+
+        .content-section:not(#presentacion) h2, .presentation-details h2 /* Para otros H2 que puedan existir en presentation-details */ {
+            font-family: 'Montserrat', sans-serif; color: var(--primary-color);
+            font-size: 2.2rem; font-weight: 700; margin-bottom: 2rem;
+            padding-bottom: 1rem; border-bottom: 2px solid var(--accent-color);
+            display: flex; align-items: center; line-height: 1.3;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        .content-section:not(#presentacion) h2 i, .presentation-details h2 i { 
+            margin-right: 18px; font-size: 2rem; color: var(--secondary-color); transition: color 0.3s;
+        }
+        
+        .content-section h3 {
+            font-family: 'Montserrat', sans-serif; color: var(--secondary-color);
+            font-size: 1.6rem; margin-top: 2.5rem; margin-bottom: 1.2rem;
+            font-weight: 700; transition: color 0.3s;
+        }
+        
+        .content-section h4:not(.presentation-text-container h4) /* Evita aplicar a h4 de presentation-hero si existiera */ {
+            font-family: 'Nunito Sans', sans-serif; color: var(--primary-color);
+            font-size: 1.25rem; margin-top: 1.8rem; margin-bottom: 1rem;
+            font-weight: 700; transition: color 0.3s;
+        }
+
+        .content-section p:not(.presentation-text-container p), 
+        .content-section ul:not(.presentation-text-container ul), 
+        .content-section ol:not(.presentation-text-container ol) {
+            margin-bottom: 1.3rem; text-align: left; 
+            color: var(--text-color); font-size: 1.05rem;
+            transition: color 0.3s;
+        }
+        .content-section p:last-child { margin-bottom: 0; }
+        .content-section ul, .content-section ol { padding-left: 2rem; }
+        .content-section li { margin-bottom: 0.7rem; }
+        .content-section li::marker { color: var(--accent-color); font-weight: bold; transition: color 0.3s;}
+
+        .content-section strong.highlight-rule:not(.presentation-text-container strong.highlight-rule) {
+            background-color: #FFF9C4; color: #795548;
+            padding: 0.2em 0.5em; border-radius: 4px; font-weight: 600;
+        }
+        body.dark-mode .content-section strong.highlight-rule:not(.presentation-text-container strong.highlight-rule) {
+            background-color: #424242; color: #FFECB3;
+        }
+        
+        .important-note-box {
+            background-color: #E3F2FD; border-left: 6px solid var(--secondary-color);
+            padding: 1.5rem 1.8rem; margin: 2rem 0;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        body.dark-mode .important-note-box {
+            background-color: #2C3E50; border-left-color: var(--accent-color);
+        }
+        .important-note-box p { color: var(--primary-color); margin-bottom: 0.6rem; transition: color 0.3s;}
+        .important-note-box p:last-child { margin-bottom: 0; }
+        .important-note-box strong { color: var(--primary-color); font-weight: 700; transition: color 0.3s;}
+        .important-note-box h4 {
+            margin-top: 0; margin-bottom: 1rem; color: var(--secondary-color);
+            font-size: 1.3rem; display: flex; align-items: center;
+            transition: color 0.3s;
+        }
+        .important-note-box h4 i { margin-right: 10px; color: var(--secondary-color); transition: color 0.3s;}
+
+        hr.section-divider {
+            border: 0; height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--border-color), rgba(0, 0, 0, 0));
+            margin: 2.5rem 0;
+        }
+        body.dark-mode .presentation-details hr.section-divider {
+             background-image: linear-gradient(to right, rgba(255, 255, 255, 0), var(--border-color), rgba(255, 255, 255, 0));
+        }
+
+
+        footer.main-footer {
+            background-color: var(--primary-color); color: #B0C4DE;
+            text-align: center; padding: 1.8rem; font-size: 0.95rem;
+            height: auto; line-height: 1.6;
+            transition: background-color 0.3s;
+        }
+        footer.main-footer p { margin-bottom: 0.3rem; }
+        footer.main-footer strong { color: white; }
+
+        .menu-toggle {
+            display: none; font-size: 1.8rem; color: white;
+            cursor: pointer; background: none; border: none;
+            padding: 0.5rem;
+        }
+
+        .back-to-top-button {
+            position: fixed; bottom: 25px; right: 25px;
+            background-color: var(--accent-color); color: var(--primary-color);
+            border: none; border-radius: 50%;
+            width: 50px; height: 50px; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, background-color 0.3s, color 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 990;
+        }
+        .back-to-top-button.visible { opacity: 1; visibility: visible; }
+        .back-to-top-button:hover { background-color: var(--secondary-color); color: white; }
+        body.dark-mode .back-to-top-button {
+            background-color: var(--accent-color); color: var(--primary-color);
+        }
+        body.dark-mode .back-to-top-button:hover { background-color: var(--secondary-color); color: white; }
+
+        @media (max-width: 1024px) { /* Tablet */
+            :root { --sidebar-width: 260px; }
+            header.main-header { padding: 0 1.5rem; }
+            header.main-header .logo-text { font-size: 1.5rem; }
+            .search-container input[type="search"] { width: 180px; }
+            .search-container input[type="search"]:focus { width: 240px; }
+            main.content-area { padding: 2rem 2.5rem; }
+            .content-section:not(#presentacion) h2 { font-size: 2rem; }
+            .presentation-hero { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+            .presentation-image-container { margin-right: 0; margin-bottom: 1.5rem; flex-basis: auto; }
+            .presentation-image-container img { max-height: 300px; }
+            .presentation-text-container h2 { font-size: 2.4rem; justify-content: center;}
+            .presentation-text-container h2 i { font-size: 2.2rem;}
+        }
+        @media (max-width: 768px) { /* Mobile */
+            .menu-toggle { display: flex; align-items: center; justify-content: center; margin-left: 0.5rem;}
+            .header-controls { flex-grow: 1; justify-content: flex-end; }
+            .search-container { margin-right: 0.5rem; }
+            .search-container input[type="search"] { width: 150px; font-size: 0.85rem; padding: 0.5rem 0.7rem 0.5rem 2.2rem;}
+            .search-container input[type="search"]:focus { width: 180px; }
+            .theme-toggle-button { font-size: 1.3rem; margin-right: 0; }
+            nav.sidebar { transform: translateX(-100%); box-shadow: 5px 0 15px rgba(0,0,0,0.2); z-index: 1001; }
+            nav.sidebar.open { transform: translateX(0); }
+            main.content-area { margin-left: 0; padding: 1.5rem; }
+            .content-section:not(#presentacion) { padding: 2rem 1.5rem; }
+            .content-section:not(#presentacion) h2 { font-size: 1.8rem; }
+            .content-section:not(#presentacion) h2 i { font-size: 1.6rem; }
+            .content-section h3 { font-size: 1.4rem; }
+            .presentation-hero { padding: 1.5rem 1rem; }
+            .presentation-text-container h2 { font-size: 2rem; }
+            .presentation-text-container h2 i { font-size: 1.8rem; }
+            .presentation-text-container p { font-size: 1rem; }
+            .presentation-details { padding: 1.5rem; }
+        }
+         @media (max-width: 480px) { /* Small Mobile */
+            header.main-header .logo-text { font-size: 1.3rem; }
+            header.main-header .logo-img { height: 40px; margin-right: 10px;}
+            .search-container input[type="search"] { width: 120px; }
+            .search-container input[type="search"]:focus { width: 150px; }
+            .content-section:not(#presentacion) h2 { font-size: 1.6rem; }
+            .content-section:not(#presentacion) h2 i { font-size: 1.4rem; }
+            .content-section p:not(.presentation-text-container p), 
+            .content-section ul:not(.presentation-text-container ul), 
+            .content-section ol:not(.presentation-text-container ol) { font-size: 1rem; }
+            .important-note-box { padding: 1.2rem; }
+            .back-to-top-button { width: 45px; height: 45px; font-size: 1.3rem; bottom: 20px; right: 20px;}
+            .presentation-text-container h2 { font-size: 1.8rem; }
+         }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="#" class="logo-container" id="logoLinkHeader">
+            <img src="LogoFaro.png" alt="Logo Faro del Río" class="logo-img">
+            <span class="logo-text">Faro del Río</span>
+        </a>
+        <div class="header-controls">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="search" id="searchInput" placeholder="Buscar en el manual...">
+            </div>
+            <button class="theme-toggle-button" id="themeToggle" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="page-wrapper">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#presentacion" class="nav-link active"><i class="fas fa-landmark"></i> Presentación</a></li>
+                <li><a href="#justificacion" class="nav-link"><i class="fas fa-balance-scale-right"></i> Justificación</a></li>
+                <li><a href="#mision-vision" class="nav-link"><i class="fas fa-flag-checkered"></i> Misión y Visión</a></li>
+                <li><a href="#ingreso-salida" class="nav-link"><i class="fas fa-people-carry-box"></i> 1. Ingreso/Salida</a></li>
+                <li><a href="#ingreso-visitantes" class="nav-link"><i class="fas fa-user-friends"></i> 2. Visitantes</a></li>
+                <li><a href="#vehiculo-vias" class="nav-link"><i class="fas fa-car-side"></i> 3. Vehículos y Vías</a></li>
+                <li><a href="#zonas-comunes" class="nav-link"><i class="fas fa-leaf"></i> 4. Zonas Comunes</a></li>
+                <li><a href="#salon-social" class="nav-link"><i class="fas fa-champagne-glasses"></i> 4.1. Salón Social</a></li>
+                <li><a href="#bienes-privados" class="nav-link"><i class="fas fa-house-user"></i> 4.2. Bienes Privados</a></li>
+                <li><a href="#ascensores" class="nav-link"><i class="fas fa-elevator"></i> 4.3. Ascensores</a></li>
+                <li><a href="#shuts-basura" class="nav-link"><i class="fas fa-recycle"></i> 4.4. Shuts de Basura</a></li>
+                <li><a href="#reformas-ampliaciones" class="nav-link"><i class="fas fa-paint-roller"></i> 5. Reformas</a></li>
+                <li><a href="#mascotas" class="nav-link"><i class="fas fa-dog"></i> 6. Mascotas</a></li>
+                <li><a href="#porteria-personal" class="nav-link"><i class="fas fa-user-tie"></i> 7. Portería y Personal</a></li>
+                <li><a href="#seguridad" class="nav-link"><i class="fas fa-shield-halved"></i> 7.1. Seguridad</a></li>
+                <li><a href="#sanciones" class="nav-link"><i class="fas fa-gavel"></i> 8. Sanciones</a></li>
+                <li><a href="#sanciones-pecuniarias" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> 8.1. Pecuniarias</a></li>
+                <li><a href="#sanciones-no-pecuniarias" class="nav-link"><i class="fas fa-person-circle-exclamation"></i> 8.2. No Pecuniarias</a></li>
+                <li><a href="#autoridad-admin" class="nav-link"><i class="fas fa-user-shield"></i> 8.3. Autoridad Admin.</a></li>
+            </ul>
+        </nav>
+
+        <main class="content-area">
+            <section id="presentacion" class="content-section active">
+                <div class="presentation-hero">
+                    <div class="presentation-image-container">
+                        <img src="presentacion.png" alt="Edificio Faro del Río">
+                    </div>
+                    <div class="presentation-text-container">
+                        <h2><i class="fas fa-landmark"></i>Bienvenidos a nuestro Manual de Convivencia</h2>
+                        <p>El Conjunto Residencial Faro del Río, una entidad de derecho privado en la ciudad de Medellín, se rige por la Constitución Política, las leyes colombianas y su Reglamento de Propiedad Horizontal. Este manual es su guía fundamental para una vida comunitaria armónica y enriquecedora.</p>
+                        <p>Nuestro objetivo principal es <strong class="highlight-rule">mejorar la calidad de vida</strong> de todos los residentes, construyendo una comunidad humana, segura y tranquila mediante la autorregulación y el respeto mutuo. El buen comportamiento nace de la convicción personal de ser mejores vecinos y ciudadanos.</p>
+                    </div>
+                </div>
+                <div class="presentation-details">
+                    <p>Este manual, fruto del consenso y la participación activa de la comunidad, utiliza un lenguaje claro y accesible para fomentar la conciencia sobre el impacto de nuestras acciones individuales en el bienestar colectivo. Se fundamenta en valores esenciales como el <strong class="highlight-rule">respeto, la tolerancia, la amabilidad, la responsabilidad y el sentido de pertenencia</strong>.</p>
+                    <hr class="section-divider">
+                    <p>Aquí se abordan temas cruciales para la convivencia diaria: el manejo del ruido, la seguridad integral, el aseo de las áreas, el cuidado de las mascotas, el uso de los parqueaderos, el bienestar de los niños y la importancia de una comunicación efectiva. Estas normas, aprobadas por la Asamblea General de Propietarios, son de <strong class="highlight-rule">cumplimiento obligatorio</strong> para todos los residentes, propietarios y visitantes.</p>
+                    <div class="important-note-box">
+                        <h4><i class="fas fa-child-reaching"></i> Nuestros Niños, Nuestro Futuro</h4>
+                        <p>Los niños son la alegría y el futuro de nuestra comunidad. Merecen todo nuestro respeto, un buen ejemplo y una orientación constante. Su natural curiosidad requiere nuestra comprensión y cuidado permanente.</p>
+                        <ul>
+                            <li>Se debe evitar los gritos y las carreras en las zonas comunes para mantener la tranquilidad de todos.</li>
+                            <li>Es fundamental inculcarles el cuidado y el respeto por los bienes del Conjunto. Los padres son responsables por los daños que puedan ocasionar.</li>
+                            <li>Los menores de 7 años deben estar siempre acompañados por un adulto responsable dentro del hogar y en las áreas comunes.</li>
+                            <li>Se les debe enseñar el respeto por la naturaleza, por las personas mayores y por los otros niños.</li>
+                        </ul>
+                    </div>
+                    <h4><i class="fas fa-comments-dollar"></i> Una Comunicación Clara y Respetuosa</h4>
+                    <p>La comunicación asertiva es esencial para una buena convivencia. Diríjase siempre a los demás con respeto, utilizando el tono y el momento adecuados. Exprese sus ideas de forma clara, veraz y tolerante.</p>
+                    <p>Saber escuchar es fundamental en cualquier interacción. El diálogo directo es el principal medio para resolver diferencias. Las comunicaciones escritas dirigidas a la administración deben estar debidamente firmadas; los anónimos no tendrán validez alguna.</p>
+                </div>
+            </section>
+
+            <section id="justificacion" class="content-section">
+                <h2><i class="fas fa-balance-scale-right"></i>El Propósito del Manual</h2>
+                <p>La Asamblea de Propietarios aprueba este Manual con el fin de garantizar los derechos y deberes de todos en el Conjunto Residencial Faro del Río. Se alinea con las normas de comportamiento, disciplina, seguridad y el régimen de sanciones, todo en armonía con la Ley 675 y el reglamento de Propiedad Horizontal, <strong class="highlight-rule">priorizando siempre el interés general</strong> sobre el particular.</p>
+                <p>Este documento es un instrumento para la sana convivencia, basado en los principios de una interacción armónica, el respeto mutuo, la tolerancia, el sentido de pertenencia y la disciplina, que son los fundamentos de una vida pacífica y comunitaria.</p>
+                <p>Convivir es "vivir en compañía" de otros de manera armónica, respetando el espacio y la dignidad de cada persona. La Ley 675 de 2001 (en su art. 2) promueve las relaciones pacíficas de cooperación y solidaridad. El art. 3 de la misma ley subraya la importancia del respeto a la dignidad humana.</p>
+                <p>Esperamos que toda la comunidad conozca, interiorice y acate estas normas para lograr un ambiente sano y agradable. Su vivienda es un patrimonio valioso, fruto de su esfuerzo, y cuidarlo es responsabilidad de todos.</p>
+            </section>
+
+            <section id="mision-vision" class="content-section">
+                <h2><i class="fas fa-flag-checkered"></i>Nuestra Misión y Visión</h2>
+                <h3>La Misión</h3>
+                <p>Ser el mejor lugar para convivir, mejorando continuamente la calidad de vida a través del fomento del respeto, la comunicación efectiva, la honestidad, la tolerancia y la dignidad humana, con un trabajo constante en las relaciones interpersonales, el apoyo comunitario y una excelente administración de los recursos.</p>
+                <h3>La Visión</h3>
+                <p>Ser reconocidos en la ciudad de Medellín y en el Valle de Aburrá por nuestra excepcional calidad de vida y una grata convivencia, generando una imagen positiva que beneficie a todos los residentes, unidos para crecer, servir y fortalecernos como comunidad.</p>
+            </section>
+
+            <section id="ingreso-salida" class="content-section">
+                <h2><i class="fas fa-people-carry-box"></i>1. Sobre el Ingreso o la Salida Definitiva</h2>
+                <ol>
+                    <li>Los nuevos propietarios o residentes deben diligenciar el formato de censo en la oficina de administración.</li>
+                    <li>Los propietarios o las agencias de arrendamiento deben informar por escrito a la Administración los datos del nuevo arrendatario.</li>
+                    <li>Se debe informar a la Administración sobre los cambios de arrendatario o la venta de la copropiedad.</li>
+                    <li>Para los trasteos o mudanzas: se debe notificar por escrito a la Administración con la debida anticipación para obtener el permiso correspondiente.</li>
+                    <li>Se entregará un ejemplar de este Manual, dejando constancia de su recibido.</li>
+                    <li>El horario para los trasteos es: de Lunes a Viernes de 8:00 a.m. a 5:00 p.m.; y los Sábados de 8:00 a.m. a 3:00 p.m.</li>
+                </ol>
+                <div class="important-note-box">
+                    <p><strong>Responsabilidad por Daños en Trasteos:</strong> Cualquier daño ocasionado a las instalaciones, fachadas o zonas comunes durante el trasteo será responsabilidad directa de la empresa de mudanza o, en su defecto, del nuevo copropietario o tenedor del inmueble.</p>
+                </div>
+            </section>
+
+            <section id="ingreso-visitantes" class="content-section">
+                <h2><i class="fas fa-user-friends"></i>2. Sobre el Ingreso de Visitantes</h2>
+                 <ol>
+                    <li><strong class="highlight-rule">Los guardas de seguridad deben anunciar a TODOS los visitantes, sin ninguna excepción.</strong></li>
+                    <li>Solo ingresarán aquellos visitantes que hayan sido autorizados previamente por el residente a través de la portería.</li>
+                    <li>Esta autorización también aplica a los "visitantes habituales" (como empleados domésticos, trabajadores particulares, familiares frecuentes).</li>
+                    <li>El residente es responsable del comportamiento de su visita. Cualquier daño en las áreas comunes será asumido económicamente por quien autorizó el ingreso.</li>
+                    <li>No se permite el ingreso de visitantes a los apartamentos desocupados sin una autorización escrita del propietario.</li>
+                    <li>No se permitirá el ingreso de "personas no gratas" (definidas por el Consejo de Administración, previo análisis del caso).</li>
+                    <li><strong class="highlight-rule">En caso de huéspedes por varios días: se debe informar en la portería (suministrando su identidad y los permisos correspondientes).</strong></li>
+                </ol>
+                <div class="important-note-box">
+                    <h4><i class="fas fa-door-open"></i> Normas de la Portería</h4>
+                    <p>• El personal de seguridad está instruido sobre sus funciones y los procedimientos a seguir.</p>
+                    <p>• <strong class="highlight-rule">La portería NO es un sitio de reuniones sociales</strong>; esto dificulta la labor del guarda. Esta norma aplica tanto a familiares como a empleados.</p>
+                    <p>• Dejar llaves u objetos de valor en la portería es de <strong class="highlight-rule">ABSOLUTA responsabilidad</strong> del copropietario u ocupante.</p>
+                    <p>• La correspondencia y los paquetes se entregan sellados. <strong class="highlight-rule">Está prohibido manipular o dejar paquetes sin supervisión en la portería</strong>.</p>
+                </div>
+            </section>
+            
+            <section id="vehiculo-vias" class="content-section">
+                <h2><i class="fas fa-car-side"></i>3. Sobre los Vehículos y el Uso de las Vías</h2>
+                <ol>
+                    <li>Los vehículos de los residentes (automóviles, motos, etc.) deben registrarse en la Administración.</li>
+                    <li>Al estacionar: las ventanillas y puertas deben estar cerradas, y no se deben dejar objetos de valor a la vista. <strong class="highlight-rule">El Conjunto NO ES RESPONSABLE por pérdidas o hurtos.</strong></li>
+                    <li>No se deben usar equipos de sonido a alto volumen en los vehículos estacionados.</li>
+                    <li>El propietario o residente es responsable por los daños causados por él, sus hijos o sus visitantes. Las diferencias se resolverán a través del Comité de Convivencia, el Consejo de Administración o la autoridad competente.</li>
+                    <li><strong class="highlight-rule">Está prohibido el uso de vehículos por menores de edad dentro de las instalaciones del Conjunto.</strong> Los padres son los responsables directos.</li>
+                    <li>Está prohibido estacionar en los parqueaderos: lanchas, carros de venta de productos, buses, volquetas o vehículos comerciales de gran tamaño.</li>
+                    <li>Está prohibido el ingreso de vehículos con un peso superior a 2.5 toneladas (excepto los vehículos de recolección de basura, bomberos, servicios públicos esenciales y mudanzas autorizadas).</li>
+                    <li><strong class="highlight-rule">La enseñanza de conducción dentro del conjunto está TOTALMENTE PROHIBIDA.</strong></li>
+                    <li>No se permiten reparaciones mecánicas, de latonería o pintura (salvo aquellas estrictamente necesarias para el retiro del vehículo).</li>
+                    <li>No se deben usar pitos o alarmas de forma indebida o excesiva.</li>
+                    <li><strong class="highlight-rule">La velocidad máxima permitida es de 15 KM/H.</strong></li>
+                    <li>El retiro de un vehículo por parte de un no propietario requiere una autorización escrita.</li>
+                    <li>Las motos deben estacionarse únicamente en los parqueaderos designados para motos. No deben ubicarse en zonas comunes, zonas verdes o andenes.</li>
+                    <li>Las vías son para el tránsito vehicular; no deben ser obstaculizadas.</li>
+                    <li>Está prohibido usar las zonas comunes para realizar compraventas o negocios de cualquier índole.</li>
+                </ol>
+                <p class="important-note-box"><strong>Capacidad de Parqueo: El Conjunto cuenta con 18 lugares disponibles.</strong></p>
+                <ol start="16"> 
+                    <li>No se deben lavar vehículos en el área del parqueadero.</li>
+                    <li>Se debe parquear dentro de la zona delimitada, sin invadir las zonas peatonales o de tránsito.</li>
+                    <li>Los propietarios deben tener su propia póliza vehicular todo riesgo vigente.</li>
+                    <li>Cualquier daño a las instalaciones del Conjunto debe ser informado al administrador. Si hay renuencia a responder, se acudirá a las autoridades competentes.</li>
+                    <li>Se deben reparar inmediatamente los escapes de gasolina o aceite de los vehículos.</li>
+                    <li><strong class="highlight-rule">Los propietarios que NO residen en el conjunto NO pueden parquear sus vehículos.</strong></li>
+                    <li><strong class="highlight-rule">Se permite UN SOLO vehículo por apartamento.</strong></li>
+                    <li><strong class="highlight-rule">El vehículo debe ser conducido por un RESIDENTE del conjunto.</strong></li>
+                    <li>Está prohibido dejar vehículos parqueados de forma permanente e indefinida.</li>
+                    <li>No se debe usar el parqueadero para reparaciones extensas (salvo fuerza mayor) o para parquear vehículos chocados o en desuso (estos deben retirarse en un máximo de 10 días).</li>
+                    <li><strong class="highlight-rule">Dejar un vehículo inmóvil por más de 48 horas requiere comunicar a la administración (el motivo será evaluado).</strong></li>
+                </ol>
+                <div class="important-note-box">
+                    <p><strong class="highlight-rule">En caso de viaje o ausencia prolongada: se debe dejar un contacto para mover el vehículo en caso de emergencia.</strong></p>
+                </div>
+                <ol start="27">
+                    <li>Los parqueaderos comunes son exclusivamente para parquear vehículos.</li>
+                    <li><strong class="highlight-rule">Para usar los parqueaderos comunes: es indispensable estar a Paz y Salvo con la administración y no tener sanciones vigentes.</strong></li>
+                    <li>Está prohibido el ingreso de Taxis (excepto si el residente es el propietario del taxi, para el traslado de enfermos, o para trasteos debidamente justificados).</li>
+                    <li><strong class="highlight-rule">Cualquier daño o choque en el parqueadero debe ser notificado. El causante debe hacerse cargo INMEDIATAMENTE de los costos.</strong></li>
+                    <li>Los propietarios deben entregar una copia de la matrícula de sus vehículos a los porteros para el censo vehicular.</li>
+                    <li>Estas normas aplican a todos por igual (copropietarios, residentes, visitantes y personal de servicio).</li>
+                </ol>
+                <p>Los casos no previstos en este manual se regirán por las leyes de tránsito y civiles vigentes en Colombia.</p>
+            </section>
+
+            <section id="zonas-comunes" class="content-section">
+                <h2><i class="fas fa-leaf"></i>4. Sobre las Zonas Comunes</h2>
+                <p>Las zonas verdes, el salón social, el cuarto de reciclaje, los ascensores, la portería, los shuts de basura, la oficina de administración, los contenedores, las lámparas y demás bienes comunes son patrimonio del conjunto y deben tratarse con el mayor cuidado. Los daños ocasionados por maltrato o mal uso serán pagados al 100% por los responsables (o los padres de los menores involucrados). Si el daño es causado por un visitante, el costo será asumido por el propietario o residente que autorizó su ingreso.</p>
+                <ol>
+                    <li>No se debe obstaculizar el acceso a las zonas comunes con bicicletas, materos grandes, o usarlas como bodega personal.</li>
+                    <li>No se debe conducir bicicletas, monopatines, etc., en estas zonas para evitar accidentes o daños a las plantas y jardines.</li>
+                    <li>No se debe jugar con elementos que puedan dañar las plantas o causar molestias o accidentes a otros (como pelotas duras, piedras, etc.).</li>
+                    <li>Las zonas comunes (diferentes al salón social) no son para realizar reuniones, fiestas, ni para el consumo de alcohol o sustancias psicoactivas.</li>
+                    <li>Está prohibido colocar avisos, cables, antenas o tender ropa en las fachadas, ventanas o balcones.</li>
+                    <li>No se debe usar el antejardín como depósito de enseres (tales como neveras, lavadoras, colchones, etc.).</li>
+                    <li><strong class="highlight-rule">Está prohibido el uso de pólvora en cualquier área del conjunto.</strong></li>
+                    <li>No se debe cambiar el color o la forma de las fachadas o estructuras que alteren la uniformidad arquitectónica del conjunto. Las reformas deben seguir lo estipulado en el reglamento de PH y este manual.</li>
+                    <li>No se deben pintar objetos metálicos, de madera u otro material en las zonas comunes.</li>
+                    <li><strong class="highlight-rule">Está prohibido encender fogatas.</strong> Solo se permitirán actividades programadas y autorizadas por la administración.</li>
+                    <li>Los escombros de las reformas o reparaciones deben evacuarse prontamente; no deben almacenarse en las áreas comunes ni arrojarse por los shuts de basura.</li>
+                    <li>Está prohibido usar las zonas comunes como baño público.</li>
+                    <li>El Conjunto es de todos; por lo tanto, los actos que ocurran en las zonas comunes son competencia y responsabilidad de todos los propietarios.</li>
+                    <li>La conservación y el mantenimiento de estas áreas dependen del pago oportuno de las cuotas de administración.</li>
+                    <li>El propietario que arrienda o cede el uso de su apartamento, cede también el derecho al uso del área social. El propietario solo podrá usarla como invitado de un residente.</li>
+                </ol>
+            </section>
+
+            <section id="salon-social" class="content-section">
+                <h2><i class="fas fa-champagne-glasses"></i>4.1. Sobre el Salón Social</h2>
+                <ol>
+                    <li>Su uso es exclusivo de los residentes para la realización de reuniones y actos sociales.</li>
+                    <li>Se debe separar con un mínimo de 8 días de anticipación, previa consignación del valor indicado por la Administración y un depósito para cubrir posibles daños. Sin la consignación, no se considera efectiva la reserva.</li>
+                    <li>Los invitados deben permanecer dentro del salón social y no circular por los apartamentos u otras zonas comunes.</li>
+                    <li>Al entregar el salón, se firmará un acta con el inventario y el estado del mismo.</li>
+                    <li><strong class="highlight-rule">No se deben instalar equipos de sonido (como maxi-tecas o mini-tecas) a un volumen excesivamente alto, ni amplificadores de gran potencia.</strong></li>
+                    <li>Se debe dejar el salón en las mismas condiciones de limpieza y orden en que fue recibido.</li>
+                    <li>El horario máximo de uso es hasta las 12:00 PM (medianoche). Si no se desaloja a tiempo, se procederá a suspender el servicio de energía eléctrica del salón.</li>
+                    <li>La Administración o el Consejo se reservan el derecho de alquiler a aquellas personas que hayan incumplido las normas previamente o hayan tenido conductas escandalosas.</li>
+                    <li>Está prohibido hacer perforaciones en los muros o techos del salón.</li>
+                    <li><strong class="highlight-rule">Los escándalos y el consumo de sustancias psicoactivas están TOTALMENTE PROHIBIDOS.</strong></li>
+                    <li>No se permite subarrendar el salón social; hacerlo conlleva una sanción.</li>
+                </ol>
+                <div class="important-note-box">
+                    <p><strong class="highlight-rule">Cualquier daño o avería a los pisos, paredes, instalaciones del salón o sus alrededores, causado por los invitados o el residente, es responsabilidad del residente y será asumido en su totalidad por él. Debe entregarlo en perfecto estado (limpio y sin basura).</strong></p>
+                </div>
+                <p class="important-note-box">Para usar el salón social, el residente debe estar a Paz y Salvo con la administración y no tener sanciones vigentes.</p>
+            </section>
+
+            <section id="bienes-privados" class="content-section">
+                <h2><i class="fas fa-house-user"></i>4.2. Sobre las Obligaciones con los Bienes Privados</h2>
+                <ol>
+                    <li>El uso de los bienes privados está limitado según su naturaleza y destino (establecido en el Reglamento de PH).</li>
+                    <li>Se deben ejecutar las reparaciones necesarias de manera inmediata en los bienes privados para no perjudicar al conjunto o a otros residentes.</li>
+                    <li>Se deben reparar inmediatamente las humedades que afecten otros apartamentos o los bienes comunes.</li>
+                    <li>Se debe abstener de realizar actos que comprometan la seguridad, solidez o salubridad del conjunto, o que perturben la tranquilidad de los demás.</li>
+                    <li>Los trabajos de reformas locativas que generen ruido (como martillar o taladrar) deben realizarse en el siguiente horario: de Lunes a Viernes de 8:00 a.m. a 6:00 p.m.; y los Sábados de 9:00 a.m. a 4:00 p.m.</li>
+                    <li>Se deben revisar periódicamente las canillas y válvulas de agua; es recomendable programar una revisión de posibles fugas internas.</li>
+                    <li>Está prohibido almacenar sustancias húmedas, infectadas, insolubles, corrosivas, explosivas o inflamables que sean peligrosas.</li>
+                    <li>Está prohibido instalar maquinarias o equipos que causen daños o perjuicios a los vecinos.</li>
+                    <li>Está prohibido arrojar desechos o basura a los bienes de otros residentes o a las áreas de uso común. Se debe usar el depósito destinado para tal fin.</li>
+                    <li>No se debe tender ropa, tapetes, traperos o calzado en las ventanas de forma visible desde el exterior, ya que afecta la presentación del conjunto.</li>
+                    <li>Se debe evitar correr muebles bruscamente, taconear, clavar puntillas o cerrar puertas con violencia (especialmente durante la noche).</li>
+                    <li>No se deben dejar envolturas, colillas de cigarrillo o envases en los pasillos, depósitos de contador de agua, o en la entrada de los apartamentos.</li>
+                    <li>No se deben dañar las puertas, paredes, barandas, contadores, vidrios y demás pertenencias del conjunto o de otros residentes.</li>
+                    <li>Se debe considerar a los enfermos y vecinos al organizar fiestas o reuniones en los apartamentos. Se deben evitar los escándalos, el desorden, abusar de los horarios permitidos y evitar llamados de atención (según el Código Nacional de Seguridad y Convivencia Ciudadana).</li>
+                    <li>En cuanto al bienestar de las mascotas (especialmente perros): no se deben dejar solos o encerrados causando ruidos que interrumpan el descanso de los vecinos.</li>
+                    <li>Las fiestas o reuniones con un número de personas que exceda la capacidad de la vivienda deben realizarse fuera del Conjunto (no se dispone de un salón social para estos eventos masivos).</li>
+                </ol>
+            </section>
+
+            <section id="ascensores" class="content-section">
+                <h2><i class="fas fa-elevator"></i>4.3. Sobre los Ascensores</h2>
+                <ol>
+                    <li>Se debe oprimir únicamente el botón del piso de destino.</li>
+                    <li>Las mascotas deben estar siempre bajo la responsabilidad y supervisión de su dueño.</li>
+                    <li>Para los trasteos o reformas, se debe usar solo el ascensor designado para tal fin, si lo hubiera, o seguir las indicaciones de la administración.</li>
+                    <li>Se debe evitar que los niños jueguen con el ascensor o sus botones.</li>
+                    <li>Se debe colaborar con el aseo del ascensor, no dejando caer basuras ni ensuciándolo.</li>
+                    <li>No se debe ingresar a los cuartos de máquinas de los ascensores.</li>
+                    <li><strong class="highlight-rule">No se deben usar los ascensores en caso de incendio, terremoto o sismo. Se deben usar las escaleras.</strong></li>
+                    <li>No se deben forzar las puertas ni golpearlas.</li>
+                    <li>No se debe detener a la fuerza el ascensor (salvo en una emergencia real, o para carga y trasteo autorizado).</li>
+                    <li><strong class="highlight-rule">Está totalmente prohibido fumar dentro de los ascensores (Norma de la OMS y legislación nacional).</strong></li>
+                </ol>
+            </section>
+
+            <section id="shuts-basura" class="content-section">
+                <h2><i class="fas fa-recycle"></i>4.4. Sobre los Shuts de Basura</h2>
+                <ol>
+                    <li>Las basuras deben estar bien empacadas y selladas en bolsas adecuadas. Se deben separar los residuos de comida en bolsas aparte, e igualmente los materiales contaminados (como toallas higiénicas, pañales) para evitar malos olores y contaminación.</li>
+                    <li><strong class="highlight-rule">No se deben arrojar por el shut: escombros, botellas de vidrio, cajas grandes, cartones voluminosos, ni objetos pesados (ya que pueden dañar o atascar el ducto).</strong></li>
+                    <li>Los apartamentos que generen desechos biológicos (como gasas, algodón, jeringas) deben realizar su manejo según las normas de sanidad vigentes. La Administración podrá informar a las autoridades competentes por el incumplimiento y el riesgo que esto genera.</li>
+                    <li>La Administración no se hace cargo de los escombros (la empresa de aseo no los recoge como basura ordinaria). Estos son responsabilidad de los residentes que los generan. No se deben guardar en los salones sociales, el área del shut ni en los parqueaderos.</li>
+                </ol>
+            </section>
+
+            <section id="reformas-ampliaciones" class="content-section">
+                <h2><i class="fas fa-paint-roller"></i>5. Sobre las Reformas y Ampliaciones</h2>
+                <ol>
+                    <li>No se deben realizar reformas externas que afecten o modifiquen el diseño arquitectónico de las fachadas o las ventanas exteriores.</li>
+                    <li>Toda reforma que afecte la fachada debe ser aprobada previamente por la Asamblea de propietarios.</li>
+                    <li>Las rejas para las ventanas exteriores o las puertas vidrieras deben instalarse en el interior del inmueble, no sobre la fachada.</li>
+                    <li>Para realizar reformas o ampliaciones (tanto en el interior como en el exterior, si están permitidas):
+                        <ul>
+                            <li>Se debe diligenciar el formato de reporte de reformas (disponible en la portería), detallando el trabajo a realizar y el listado del personal contratado.</li>
+                            <li>Si el personal autorizado para la reforma necesita sacar algún artículo o material del conjunto: el propietario debe informar por escrito al portero autorizando dicha salida.</li>
+                            <li>Los escombros generados: no se deben depositar en las zonas comunes o vías, ni tirarlos por el shut de basuras. No se debe responsabilizar a los empleados del conjunto por su evacuación.</li>
+                            <li>Los daños en las áreas privadas o comunes ocasionados por la reforma deben ser reparados por el causante en un plazo de 5 días calendario. Si no se cumple, la Administración efectuará la reparación con cargo a la cuenta del inmueble, además de aplicar la sanción correspondiente.</li>
+                            <li>Se debe cumplir con lo estipulado en la Ley 675 de 2001, sus decretos reglamentarios y el reglamento de Propiedad Horizontal del conjunto.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="mascotas" class="content-section">
+                <h2><i class="fas fa-dog"></i>6. Sobre las Mascotas</h2>
+                <p>Se admiten mascotas en el conjunto bajo la estricta responsabilidad de sus dueños, considerando el bienestar animal, la afectividad y las siguientes normas:</p>
+                <ol>
+                    <li><strong class="highlight-rule">Está prohibida la circulación de mascotas en las zonas comunes con el fin de que realicen sus deposiciones.</strong> Si esto ocurre accidentalmente, el dueño o cuidador debe recoger de inmediato los excrementos y limpiar el área afectada. La Ley 746 de 2002 establece la prohibición de dejar excrementos en lugares públicos; el tenedor es responsable de recogerlos y depositarlos en bolsas adecuadas. El incumplimiento acarrea una multa de 5 Salarios Mínimos Diarios Legales Vigentes (SMDLV) y/o 5 fines de semana de trabajo comunitario. Esto no exime de la sanción económica que pueda imponer el Consejo de Administración.</li>
+                    <li>Las mascotas solo pueden salir del conjunto para ser retiradas de la Unidad o para su paseo, y siempre deben ir cargadas o con su respectiva cadena o lazo y bozal (si es requerido por la ley). No deben estar sueltas en las zonas comunes.</li>
+                    <li>Si una mascota ataca a una persona: el propietario es plenamente responsable (de los gastos médicos, posibles demandas, etc.). La Ley 746/2002 (que busca garantizar la integridad, salubridad y bienestar de los caninos) establece que el propietario aportará una póliza de responsabilidad civil extracontractual para indemnizar los perjuicios patrimoniales, además de mantener al día el registro de vacunas y el certificado de sanidad del animal.</li>
+                    <li>Está prohibido el entrenamiento de mascotas en las zonas comunes del conjunto.</li>
+                    <li>Los daños o perjuicios que una mascota cause a los bienes comunes, privados o a personas, son entera responsabilidad de su propietario.</li>
+                    <li>Es responsabilidad de cada habitante con animales domésticos: conservar y cumplir las normas de higiene y salubridad pública (establecidas por el gobierno nacional, el Código de Convivencia Ciudadana y la Policía).</li>
+                    <li>La fauna silvestre no es propiedad del conjunto; no se deben usar animales silvestres como mascotas.</li>
+                    <li>La infracción a estas normas se sancionará según lo establecido en el reglamento de Propiedad Horizontal.</li>
+                </ol>
+            </section>
+
+            <section id="porteria-personal" class="content-section">
+                <h2><i class="fas fa-user-tie"></i>7. Sobre la Portería y el Personal de Servicio</h2>
+                <p>El personal de servicio (de administración, aseo, mantenimiento y vigilancia) trabaja por el bienestar de todos los residentes, con el objetivo de mantener una unidad agradable, ordenada, limpia y segura.</p>
+                <ol>
+                    <li>Este personal depende directamente del administrador; tienen funciones específicas asignadas para el beneficio colectivo. No pueden atender órdenes particulares de los copropietarios durante su jornada laboral.</li>
+                    <li class="important-note-box"><strong class="highlight-rule">El trato hacia el personal debe ser siempre de amabilidad, cortesía y respeto.</strong> Se les debe llamar por su nombre. De igual forma, el personal tratará a los residentes con delicadeza y cortesía. Un buen trato se refleja en una mejor atención. Cualquier inquietud sobre el desempeño del personal debe comunicarse a la administración para su corrección. Es importante enseñar a los hijos el buen trato hacia ellos.</li>
+                    <li>Los objetos de valor, las llaves o el dinero dejados en la portería quedan bajo la absoluta responsabilidad y riesgo de quien los deposite allí.</li>
+                    <li>Las encomiendas (como cajas o paquetes): son responsabilidad del destinatario. Se recomienda dejar una carta de autorización para su recibo si no se encuentra presente.</li>
+                    <li>El personal de vigilancia o de oficios varios no está autorizado para llevar a los apartamentos los domicilios o encargos dejados en la portería.</li>
+                    <li>La correspondencia se entrega personalmente al destinatario por parte de los porteros.</li>
+                </ol>
+            </section>
+
+            <section id="seguridad" class="content-section">
+                <h2><i class="fas fa-shield-halved"></i>7.1. Sobre la Seguridad</h2>
+                <ol>
+                    <li>No se debe permitir sacar electrodomésticos u objetos a personas extrañas sin una autorización directa o escrita del residente.</li>
+                    <li>No se debe dejar ingresar a nadie a los apartamentos desocupados sin una autorización escrita del propietario.</li>
+                    <li><strong class="highlight-rule">Ninguna persona ajena al conjunto podrá ingresar sin ser anunciada y autorizada previamente por el propietario o residente.</strong></li>
+                    <li>En caso de vacaciones o ausencias prolongadas: se debe reportar a la Administración para un mejor control del acceso y la seguridad.</li>
+                    <li>Los residentes deben informar solidariamente a la Administración o a la portería sobre cualquier daño en la Unidad y avisar de la presencia de personas extrañas o actitudes sospechosas.</li>
+                    <li>Se debe mantener la puerta del apartamento siempre cerrada con seguro. Ni la Administración ni la copropiedad son responsables por robos dentro de las unidades privadas. Se recomienda tomar un seguro de hogar o instalar una alarma.</li>
+                    <li><strong class="highlight-rule">Por ningún motivo se debe dejar la llave de la propiedad en la portería.</strong> Tampoco se debe entregar a los empleados de oficios varios (aun si son de confianza).</li>
+                    <li>Se debe evitar conversar en los accesos al conjunto con las puertas abiertas (esto representa un riesgo de ingreso de personas indeseables).</li>
+                    <li>Los peatones deben usar siempre la puerta de acceso peatonal, no la vehicular.</li>
+                    <li>Antes de salir del apartamento: se deben revisar que las llaves de agua y gas estén cerradas, los electrodomésticos desconectados o apagados, las ventanas cerradas; y se deben apagar veladoras o velas.</li>
+                    <li>Si se perciben ruidos extraños o se ven personas desconocidas en actitud sospechosa: se debe comunicar de inmediato a la portería. La solidaridad es clave para la seguridad.</li>
+                </ol>
+            </section>
+
+            <section id="sanciones" class="content-section">
+                <h2><i class="fas fa-gavel"></i>8. Sobre las Sanciones por Incumplimiento</h2>
+                <p>El incumplimiento de las obligaciones (relacionadas con los bienes privados, la ley, el Reglamento de Propiedad Horizontal y este Manual de Convivencia) acarreará las siguientes sanciones, sin perjuicio de las acciones judiciales o policivas que sean aplicables.</p>
+            </section>
+
+            <section id="sanciones-pecuniarias" class="content-section">
+                <h2><i class="fas fa-file-invoice-dollar"></i>8.1. Incumplimiento de las Obligaciones Pecuniarias</h2>
+                <p>El retardo en el pago de las cuotas de administración, el fondo de reserva, las cuotas extras, las multas, etc., tendrá las siguientes consecuencias:</p>
+                <ol>
+                    <li>La causación de intereses de mora (a la tasa máxima legal permitida por la Superintendencia Financiera).</li>
+                    <li>Una sanción legal por mora superior a 3 meses (además de los intereses). Se reportará el caso al abogado para el cobro jurídico y a las centrales de riesgo. Las costas y los gastos del abogado correrán por cuenta del moroso.</li>
+                    <li>Un abono parcial a un saldo pendiente se aplicará en el siguiente orden:
+                        <ol type="a">
+                            <li>A los honorarios de los abogados y los gastos de cobranzas.</li>
+                            <li>A los intereses de mora.</li>
+                            <li>A las multas (si las hubiera).</li>
+                            <li>A las cuotas extras.</li>
+                            <li>A los saldos vencidos.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="sanciones-no-pecuniarias" class="content-section">
+                <h2><i class="fas fa-person-circle-exclamation"></i>8.2. Incumplimiento de las Obligaciones No Pecuniarias</h2>
+                <p>Las sanciones por el mal uso del área social, los bienes comunes y las áreas privadas seguirán el siguiente procedimiento:</p>
+                <h4>a. Primera Falta</h4>
+                <p>Se realizará una amonestación escrita. El Administrador evaluará la situación y amonestará si lo considera necesario.</p>
+                <h4>b. Segunda Falta</h4>
+                <p>Se emitirá un requerimiento escrito por parte del Comité de Convivencia (o, en su defecto, del Consejo de Administración). Con dos amonestaciones previas, el Administrador llamará la atención formalmente y podrá sancionar con la suspensión temporal del uso y goce de los bienes comunes no esenciales.</p>
+                <h4>c. Tercera Falta</h4>
+                <p>El infractor tendrá un plazo de 5 días hábiles para interponer un recurso, ser escuchado y presentar sus descargos ante el Consejo de Administración. Si no lo hace, se entenderá que acepta los hechos y se aplicará la sanción correspondiente.</p>
+                <h4>d. Sanciones Aplicables</h4>
+                <ol type="a">
+                    <li>La publicación en un lugar designado por la administración del listado de los infractores (indicando el hecho que origina la sanción).</li>
+                    <li>La imposición de una multa equivalente a una cuota de Administración.</li>
+                    <li>La restricción al uso y goce de los bienes de uso común no esenciales.</li>
+                    <li>La suspensión de la calidad de consejero (si aplica al infractor).</li>
+                    <li>La inhabilidad para ser designado como consejero en el futuro.</li>
+                </ol>
+                <p>Las multas impuestas prestarán mérito ejecutivo; los usuarios renuncian al requerimiento previo para la constitución en mora. Estas serán facturadas al mes siguiente de cometida la acción sancionable.</p>
+                <p>Cada propietario es solidariamente responsable con aquellas personas a quienes ceda el uso de su unidad privada (a cualquier título) por sus actos u omisiones, y por la cancelación de las multas impuestas por el incumplimiento del reglamento.</p>
+            </section>
+
+            <section id="autoridad-admin" class="content-section">
+                <h2><i class="fas fa-user-shield"></i>8.3. Sobre la Autoridad de la Administración y los Vigilantes</h2>
+                <p>La Asamblea General de copropietarios reconoce la autoridad del Administrador, los porteros y los vigilantes del Conjunto Residencial Faro del Río para hacer cumplir las normas contenidas en este manual de convivencia.</p>
+            </section>
+        </main>
+    </div>
+
+    <button class="back-to-top-button" id="backToTopBtn" aria-label="Volver Arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer class="main-footer">
+        <p><strong>Conjunto Residencial Faro del Río</strong> © <span id="currentYear"></span></p>
+        <p>Calle 65 No. 56 A 60 | Teléfono: 579 80 65 | Medellín – Colombia</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const contentArea = document.querySelector('main.content-area');
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const logoLinkHeader = document.getElementById('logoLinkHeader');
+            const searchInput = document.getElementById('searchInput');
+            const themeToggleButton = document.getElementById('themeToggle');
+            const backToTopButton = document.getElementById('backToTopBtn');
+            const body = document.body;
+
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // --- THEME TOGGLE ---
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                body.classList.add(currentTheme);
+                if (currentTheme === 'dark-mode') {
+                    themeToggleButton.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
+
+            themeToggleButton.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                let theme = 'light-mode';
+                if (body.classList.contains('dark-mode')) {
+                    theme = 'dark-mode';
+                    themeToggleButton.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    themeToggleButton.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+                localStorage.setItem('theme', theme);
+            });
+
+            // --- NAVIGATION ---
+            function showSection(hash, isInitialLoad = false, fromSearch = false) {
+                let sectionFound = false;
+                contentSections.forEach(section => {
+                    if ('#' + section.id === hash) {
+                        section.classList.add('active');
+                        sectionFound = true;
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+
+                if (!sectionFound && !fromSearch) {
+                    hash = '#presentacion'; // Default to presentation
+                    const presentationSection = document.querySelector(hash);
+                    if(presentationSection) presentationSection.classList.add('active');
+                }
+                
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === hash);
+                });
+
+                if (!isInitialLoad && contentArea) {
+                   // Scroll to top of content area, not window, for smoother UX
+                   contentArea.scrollTop = 0; 
+                }
+
+                // Close sidebar on mobile after navigation
+                if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    clearSearchHighlights(); // Clear highlights when navigating via sidebar
+                    const targetHash = this.getAttribute('href');
+                    // Only push state if hash changes or if search was active
+                    if (window.location.hash !== targetHash || (searchInput && searchInput.value !== "")) {
+                        history.pushState(null, null, targetHash);
+                         if(searchInput) searchInput.value = ""; // Clear search on nav click
+                         filterSidebar(""); // Reset sidebar filter
+                    }
+                    showSection(targetHash);
+                });
+            });
+            
+            if (logoLinkHeader) {
+                logoLinkHeader.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    clearSearchHighlights();
+                    const targetHash = '#presentacion';
+                     if (window.location.hash !== targetHash || (searchInput && searchInput.value !== "")) {
+                        history.pushState(null, null, targetHash);
+                        if(searchInput) searchInput.value = "";
+                        filterSidebar("");
+                    }
+                    showSection(targetHash);
+                });
+            }
+
+            // Handle initial page load and back/forward navigation
+            let initialHash = window.location.hash;
+            if (initialHash && document.querySelector(initialHash)) {
+                showSection(initialHash, true);
+            } else {
+                showSection('#presentacion', true); // Default to presentation
+                // history.replaceState(null, null, '#presentacion'); // Update URL without new history entry
+            }
+
+            window.addEventListener('popstate', function() {
+                clearSearchHighlights(); // Clear highlights on back/forward
+                const currentHash = window.location.hash || '#presentacion';
+                if(searchInput) searchInput.value = ""; // Clear search on popstate
+                filterSidebar(""); // Reset sidebar filter
+                showSection(currentHash);
+            });
+
+            // --- MENU TOGGLE (Mobile) ---
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    const isOpen = sidebar.classList.toggle('open');
+                    this.setAttribute('aria-expanded', isOpen.toString());
+                    this.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // Close sidebar if clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                    // Check if the click is outside the sidebar AND not on the toggle button
+                    if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                        sidebar.classList.remove('open');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // --- SEARCH FUNCTIONALITY ---
+            function clearSearchHighlights() {
+                contentSections.forEach(section => {
+                    const originalHTML = section.getAttribute('data-original-html');
+                    if (originalHTML) {
+                        section.innerHTML = originalHTML;
+                        // section.removeAttribute('data-original-html'); // Optional: remove if not needed after clearing
+                    }
+                });
+            }
+
+            function highlightText(element, searchTerm) {
+                // Store original HTML if not already stored
+                if (!element.getAttribute('data-original-html')) {
+                    element.setAttribute('data-original-html', element.innerHTML);
+                }
+                const innerHTML = element.getAttribute('data-original-html'); // Use original for subsequent searches
+                const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                element.innerHTML = innerHTML.replace(regex, '<mark class="search-highlight">$1</mark>');
+            }
+            
+            function filterSidebar(term) {
+                const lowerTerm = term.toLowerCase();
+                navLinks.forEach(link => {
+                    const linkText = link.textContent.toLowerCase();
+                    const sectionId = link.getAttribute('href').substring(1);
+                    const section = document.getElementById(sectionId);
+                    let sectionContent = "";
+                    if (section) {
+                        // Use data-original-html if available (to search un-highlighted text), otherwise current textContent
+                        sectionContent = (section.getAttribute('data-original-html') || section.textContent).toLowerCase();
+                    }
+
+                    if (linkText.includes(lowerTerm) || sectionContent.includes(lowerTerm)) {
+                        link.parentElement.classList.remove('hidden-by-search');
+                    } else {
+                        link.parentElement.classList.add('hidden-by-search');
+                    }
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.trim();
+                    clearSearchHighlights(); // Clear previous highlights before new search
+                    filterSidebar(searchTerm); // Filter sidebar based on search term
+
+                    if (searchTerm.length > 1) { // Perform search if term is long enough
+                        let firstMatchSection = null;
+                        let hasMatches = false;
+                        contentSections.forEach(section => {
+                            // Ensure original HTML is stored before highlighting
+                            if (!section.getAttribute('data-original-html')) {
+                                section.setAttribute('data-original-html', section.innerHTML);
+                            }
+                            const sectionText = section.textContent.toLowerCase(); // Search current text (might include old highlights if not cleared properly)
+                            if (sectionText.includes(searchTerm.toLowerCase())) {
+                                highlightText(section, searchTerm);
+                                section.classList.add('active'); // Show section with matches
+                                hasMatches = true;
+                                if (!firstMatchSection) {
+                                    firstMatchSection = section;
+                                }
+                            } else {
+                                section.classList.remove('active'); // Hide section without matches
+                            }
+                        });
+
+                        if (firstMatchSection) {
+                             // Update active link in sidebar to the first matched section
+                             navLinks.forEach(link => link.classList.remove('active'));
+                             const activeLink = document.querySelector(`.nav-link[href="#${firstMatchSection.id}"]`);
+                             if(activeLink) activeLink.classList.add('active');
+                             // history.pushState(null, null, `#${firstMatchSection.id}`); // Optionally update URL
+                        } else if (!hasMatches) { // No matches at all
+                             // Potentially show a "no results" message or default section
+                             showSection('#presentacion', false, true); // show presentation if no results, fromSearch=true
+                        }
+
+                    } else { // If search term is too short or empty
+                        filterSidebar(""); // Reset sidebar filter
+                        // Revert to the section indicated by the current URL hash, or default to presentation
+                        const currentHash = window.location.hash || '#presentacion';
+                        showSection(currentHash, false, true); // fromSearch=true to prevent default fallback logic if hash is invalid
+                    }
+                });
+            }
+
+            // --- BACK TO TOP BUTTON ---
+            if (contentArea && backToTopButton) { // Ensure contentArea exists
+                contentArea.addEventListener('scroll', () => {
+                    if (contentArea.scrollTop > 300) {
+                        backToTopButton.classList.add('visible');
+                    } else {
+                        backToTopButton.classList.remove('visible');
+                    }
+                });
+
+                backToTopButton.addEventListener('click', () => {
+                    contentArea.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
