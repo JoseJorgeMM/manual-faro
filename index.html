@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/layout-fixes.css">
+    <link rel="stylesheet" href="css/fixes.css">
     
     <!-- Preload critical resources -->
     <link rel="preload" href="css/styles.css" as="style">
@@ -1051,13 +1052,15 @@
         </div>
     </header>
 
+    <div class="overlay" id="sidebarOverlay"></div>
+    
     <!-- Main Content -->
     <div class="page-wrapper" id="main-content" role="main">
         <!-- Sidebar Navigation -->
         <nav class="sidebar" role="navigation" aria-label="Menú principal">
             <div class="sidebar-header">
                 <h2 class="sidebar-title">Menú</h2>
-                <button class="sidebar-close" aria-label="Cerrar menú">
+                <button class="sidebar-close" id="sidebarClose" aria-label="Cerrar menú">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -1091,22 +1094,24 @@
             </ul>
         </nav>
 
-        <!-- Welcome Section -->
-        <section class="welcome-section" id="welcome">
-            <div class="welcome-content">
-                <img src="assets/images/LogoFaro.png" alt="Logo Faro del Río" class="welcome-logo">
-                <h1 class="welcome-title">Bienvenidos a Faro del Río</h1>
-                <h2 class="welcome-subtitle">Manual de Convivencia</h2>
-                <p class="welcome-description">
-                    Un espacio diseñado para la convivencia armónica, el respeto mutuo y el bienestar de nuestra comunidad.
-                    Este manual es su guía fundamental para una vida comunitaria enriquecedora y pacífica.
-                </p>
-                <a href="#manual" class="btn-manual">Explorar Manual</a>
-            </div>
-        </section>
+        <!-- Content Container -->
+        <div class="content-container">
+            <!-- Welcome Section -->
+            <section class="welcome-section" id="welcome">
+                <div class="welcome-content">
+                    <img src="assets/images/LogoFaro.png" alt="Logo Faro del Río" class="welcome-logo">
+                    <h1 class="welcome-title">Bienvenidos a Faro del Río</h1>
+                    <h2 class="welcome-subtitle">Manual de Convivencia</h2>
+                    <p class="welcome-description">
+                        Un espacio diseñado para la convivencia armónica, el respeto mutuo y el bienestar de nuestra comunidad.
+                        Este manual es su guía fundamental para una vida comunitaria enriquecedora y pacífica.
+                    </p>
+                    <a href="#manual" class="btn-manual">Explorar Manual</a>
+                </div>
+            </section>
 
-        <!-- Main Content Area -->
-        <main class="content-area" id="main-content">
+            <!-- Main Content Area -->
+            <main class="content-area">
             <!-- No JavaScript Message -->
             <noscript>
                 <div class="no-js-message">
@@ -1441,8 +1446,9 @@
             </section>
                 </div>
         </section>
-    </main>
-    </div>
+            </main>
+        </div> <!-- End of content-container -->
+    </div> <!-- End of page-wrapper -->
 
     <!-- Back to Top Button -->
     <button class="back-to-top-button" id="backToTopBtn" aria-label="Volver al inicio" title="Volver al inicio">

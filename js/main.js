@@ -1,12 +1,14 @@
 // DOM Elements
 const menuToggle = document.querySelector('.menu-toggle');
-const mainNav = document.querySelector('.main-nav');
-const overlay = document.querySelector('.overlay');
-const backToTopBtn = document.querySelector('.back-to-top');
-const searchInput = document.querySelector('.search-input');
+const sidebar = document.querySelector('.sidebar');
+const sidebarClose = document.querySelector('#sidebarClose');
+const overlay = document.querySelector('#sidebarOverlay');
+const backToTopBtn = document.querySelector('.back-to-top-button');
+const searchInput = document.querySelector('#searchInput');
 const searchResults = document.querySelector('.search-results');
-const themeToggle = document.querySelector('.theme-toggle');
+const themeToggle = document.querySelector('.theme-toggle-button');
 const currentYear = document.querySelector('.current-year');
+const navLinks = document.querySelectorAll('.nav-link');
 
 // Set current year in footer
 if (currentYear) {
@@ -16,20 +18,44 @@ if (currentYear) {
 // Mobile menu toggle
 if (menuToggle) {
     menuToggle.addEventListener('click', () => {
-        mainNav.classList.toggle('active');
-        overlay.classList.toggle('active');
-        document.body.classList.toggle('no-scroll');
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.classList.add('no-scroll');
+        menuToggle.setAttribute('aria-expanded', 'true');
+    });
+}
+
+// Close sidebar with close button
+if (sidebarClose) {
+    sidebarClose.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        menuToggle.setAttribute('aria-expanded', 'false');
     });
 }
 
 // Close mobile menu when clicking overlay
 if (overlay) {
     overlay.addEventListener('click', () => {
-        mainNav.classList.remove('active');
+        sidebar.classList.remove('active');
         overlay.classList.remove('active');
         document.body.classList.remove('no-scroll');
+        menuToggle.setAttribute('aria-expanded', 'false');
     });
 }
+
+// Close sidebar when clicking a nav link on mobile
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth < 1200) {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+});
 
 // Back to top button
 if (backToTopBtn) {
@@ -109,23 +135,59 @@ function handleSearch(e) {
         return;
     }
     
-    // In a real implementation, you would fetch search results from a server
-    // For now, we'll use a simple client-side search
-    const searchableContent = document.querySelectorAll('[data-searchable]');
+    // Search through all section headings and content
+    const sections = document.querySelectorAll('.content-section');
     const results = [];
     
-    searchableContent.forEach(element => {
-        const text = element.textContent.toLowerCase();
-        if (text.includes(query)) {
-            results.push({
-                title: element.dataset.title || element.textContent.trim().substring(0, 60) + '...',
-                url: element.href || '#',
-                excerpt: text.substring(0, 120) + '...'
-            });
-        }
+    sections.forEach(section => {
+        // Search in headings
+        const headings = section.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        const sectionId = section.id;
+        
+        headings.forEach(heading => {
+            const text = heading.textContent.toLowerCase();
+            if (text.includes(query)) {
+                results.push({
+                    title: heading.textContent.trim(),
+                    url: `#${sectionId}`,
+                    excerpt: `Encontrado en la sección: ${sectionId}`
+                });
+            }
+        });
+        
+        // Search in paragraphs
+        const paragraphs = section.querySelectorAll('p');
+        paragraphs.forEach(p => {
+            const text = p.textContent.toLowerCase();
+            if (text.includes(query)) {
+                results.push({
+                    title: `Encontrado en ${sectionId}`,
+                    url: `#${sectionId}`,
+                    excerpt: p.textContent.trim().substring(0, 120) + '...'
+                });
+            }
+        });
+        
+        // Search in lists
+        const listItems = section.querySelectorAll('li');
+        listItems.forEach(li => {
+            const text = li.textContent.toLowerCase();
+            if (text.includes(query)) {
+                results.push({
+                    title: `Elemento de lista en ${sectionId}`,
+                    url: `#${sectionId}`,
+                    excerpt: li.textContent.trim().substring(0, 120) + '...'
+                });
+            }
+        });
     });
     
-    displaySearchResults(results);
+    // Remove duplicates
+    const uniqueResults = [...new Map(results.map(item => 
+        [item.url + item.title, item])).values()];
+    
+    // Only keep the first 10 results
+    displaySearchResults(uniqueResults.slice(0, 10));
 }
 
 // Display search results
