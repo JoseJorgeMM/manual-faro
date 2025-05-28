@@ -132,6 +132,14 @@
         }
         .theme-toggle-button:hover { color: var(--accent-color); }
 
+        :root {
+            --sidebar-width: 290px;
+            --sidebar-collapsed-width: 70px;
+            --header-height: 80px;
+            --footer-height: 120px;
+            --border-radius: 8px;
+        }
+        
         nav.sidebar {
             width: var(--sidebar-width);
             background-color: var(--card-bg);
@@ -139,17 +147,80 @@
             height: calc(100vh - var(--header-height));
             overflow-y: auto;
             position: fixed; left: 0; top: var(--header-height);
-            transition: transform 0.3s ease-in-out, background-color 0.3s, border-color 0.3s;
+            transition: all 0.3s ease-in-out;
             z-index: 999;
             border-right: 1px solid var(--border-color);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+            overflow: hidden;
+        }
+        
+        .sidebar.collapsed .nav-link span {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            position: absolute;
+        }
+        
+        .sidebar.collapsed .nav-link i {
+            margin-right: 0;
+            font-size: 1.3rem;
+        }
+        
+        .sidebar.collapsed .nav-link {
+            justify-content: center;
+            padding: 0.85rem 0;
+        }
+        
+        .sidebar-toggle {
+            position: absolute;
+            top: 10px;
+            right: -40px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-toggle:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        
+        .sidebar-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar.collapsed + .sidebar-toggle i {
+            transform: rotate(180deg);
         }
         nav.sidebar ul { list-style-type: none; }
         nav.sidebar ul li a {
-            display: flex; align-items: center; color: var(--text-muted);
-            padding: 0.85rem 1.8rem; text-decoration: none;
-            font-size: 0.9rem; font-weight: 600;
+            display: flex; 
+            align-items: center; 
+            color: var(--text-muted);
+            padding: 0.85rem 1.8rem; 
+            text-decoration: none;
+            font-size: 0.9rem; 
+            font-weight: 600;
             border-left: 5px solid transparent;
-            transition: all 0.25s ease-in-out; letter-spacing: 0.5px;
+            transition: all 0.25s ease-in-out; 
+            letter-spacing: 0.5px;
+            position: relative;
+            white-space: nowrap;
         }
         nav.sidebar ul li a i {
             margin-right: 15px; width: 22px; text-align: center;
@@ -169,11 +240,16 @@
         nav.sidebar ul li.hidden-by-search { display: none !important; }
 
         main.content-area {
-            flex-grow: 1; padding: 2.5rem 3rem;
+            flex-grow: 1; 
+            padding: 2.5rem 3rem;
             margin-left: var(--sidebar-width);
             background-color: var(--light-bg);
             min-height: calc(100vh - var(--header-height) - var(--footer-height));
-            transition: background-color 0.3s;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .content-area.sidebar-collapsed {
+            margin-left: var(--sidebar-collapsed-width);
         }
         
         /* --- MODERN FOOTER STYLES --- */
@@ -660,35 +736,100 @@
         }
         body.dark-mode .presentation-details hr.section-divider {
              background-image: linear-gradient(to right, rgba(255, 255, 255, 0), var(--border-color), rgba(255, 255, 255, 0));
-        }
-
-
-        /* Media queries for responsive design */
-
-        @media (max-width: 768px) {
-            .main-footer {
-                padding: 0;
             }
             
-            .footer-container {
-                flex-direction: column;
-                padding: 1.5rem;
+            body.dark-mode .footer-logo-container {
+                background: rgba(0, 0, 0, 0.2);
             }
             
-            .footer-column {
-                width: 100%;
-                padding-right: 0;
+            body.dark-mode .social-icon {
+                background: rgba(0, 0, 0, 0.2);
+            }
+            
+            body.dark-mode .contact-icon {
+                background: rgba(0, 0, 0, 0.2);
+            }
+
+            .content-section {
+                display: none; 
+                animation: slideUpFadeIn 0.6s ease-out;
+            }
+            /* Estilo general para secciones que no son la presentación */
+            .content-section:not(#presentacion) {
+                background-color: var(--card-bg);
+                padding: 2.5rem; 
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
+                transition: background-color 0.3s;
+            }
+
+            .content-section.active { display: block; }
+            .content-section mark.search-highlight {
+                background-color: var(--search-highlight-bg);
+                color: var(--search-highlight-text);
+                padding: 0.1em 0.2em; border-radius: 3px; font-weight: bold;
+            }
+
+            @keyframes slideUpFadeIn { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+            
+            /* --- ESTILOS MEJORADOS PARA LA SECCIÓN DE PRESENTACIÓN --- */
+            #presentacion {
+                padding: 0; /* Quitamos padding general para dar estilo propio a sus hijos */
+                background-color: transparent; /* Hacemos transparente el contenedor principal de la sección */
+                box-shadow: none;
+            }
+
+            .presentation-hero {
+                display: flex;
+                align-items: center;
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+                color: white;
+                padding: 3rem 2.5rem;
+                border-radius: var(--border-radius);
+                margin-bottom: 2.5rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            }
+            body.dark-mode .presentation-hero {
+                 background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            }
+
+            .presentation-image-container {
+                flex: 0 0 35%; /* Ajusta según el tamaño de tu imagen */
+                margin-right: 2.5rem;
+                text-align: center; /* Centra la imagen si es más pequeña que el contenedor */
+            }
+            .presentation-image-container img {
+                max-width: 100%;
+                height: auto;
+                border-radius: var(--border-radius);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+                object-fit: cover; /* Para asegurar que la imagen cubra bien si es vertical */
+                max-height: 400px; /* Limita la altura para imágenes muy verticales */
+            }
+
+            .presentation-text-container {
+                flex: 1;
+            }
+            .presentation-text-container h2 {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 2.8rem; /* Más grande para el título de bienvenida */
+                color: white; /* Color del título */
                 margin-bottom: 1.5rem;
-                text-align: center;
-            }
-            
-            .footer-brand {
+                line-height: 1.2;
+                border-bottom: 3px solid var(--accent-color);
+                padding-bottom: 0.8rem;
+                display: flex;
                 align-items: center;
             }
-            
-            .footer-bottom {
-                padding: 1rem;
+            .presentation-text-container h2 i {
+                margin-right: 15px;
+                font-size: 2.5rem; /* Icono más grande */
+                color: var(--accent-color); /* Icono del color de acento */
             }
+            .presentation-text-container p {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+                color: #E0E7EF; /* Un blanco ligeramente más suave */
         }
 
         @media (max-width: 480px) {
@@ -794,6 +935,9 @@
 
     <div class="page-wrapper">
         <nav class="sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                <i class="fas fa-chevron-left"></i>
+            </button>
             <ul>
                 <li><a href="#presentacion" class="nav-link active"><i class="fas fa-landmark"></i> Presentación</a></li>
                 <li><a href="#justificacion" class="nav-link"><i class="fas fa-balance-scale-right"></i> Justificación</a></li>
@@ -1328,9 +1472,44 @@
                 showSection(currentHash);
             });
 
-            // --- MENU TOGGLE (Mobile) ---
+            // --- SIDEBAR TOGGLE FUNCTIONALITY ---
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.querySelector('.sidebar');
+            const contentArea = document.querySelector('.content-area');
+            
+            // Function to toggle sidebar
+            function toggleSidebar() {
+                sidebar.classList.toggle('collapsed');
+                contentArea.classList.toggle('sidebar-collapsed');
+                
+                // Save state to localStorage
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                localStorage.setItem('sidebarCollapsed', isCollapsed);
+            }
+            
+            // Add click event to toggle button
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleSidebar();
+                });
+            }
+            
+            // Check for saved preference or set default
+            const savedState = localStorage.getItem('sidebarCollapsed');
+            if (savedState === 'true') {
+                sidebar.classList.add('collapsed');
+                contentArea.classList.add('sidebar-collapsed');
+            } else if (savedState === null) {
+                // Default state (open)
+                sidebar.classList.remove('collapsed');
+                contentArea.classList.remove('sidebar-collapsed');
+            }
+            
+            // --- MOBILE MENU TOGGLE ---
             if (menuToggle) {
-                menuToggle.addEventListener('click', function() {
+                menuToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     const isOpen = sidebar.classList.toggle('open');
                     this.setAttribute('aria-expanded', isOpen.toString());
                     this.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
@@ -1348,6 +1527,28 @@
                     }
                 }
             });
+            
+            // Adjust content area margin when sidebar is toggled
+            function updateContentMargin() {
+                if (window.innerWidth > 768) {
+                    const sidebarWidth = sidebar.classList.contains('collapsed') ? 
+                                      'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)';
+                    contentArea.style.marginLeft = sidebarWidth;
+                } else {
+                    contentArea.style.marginLeft = '0';
+                }
+            }
+            
+            // Initial call
+            updateContentMargin();
+            
+            // Update on resize
+            window.addEventListener('resize', updateContentMargin);
+            
+            // Update when sidebar is toggled
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', updateContentMargin);
+            }
 
             // --- SEARCH FUNCTIONALITY ---
             function clearSearchHighlights() {
