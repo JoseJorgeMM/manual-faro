@@ -361,13 +361,70 @@
 
 
         footer.main-footer {
-            background-color: var(--primary-color); color: #B0C4DE;
-            text-align: center; padding: 1.8rem; font-size: 0.95rem;
-            height: auto; line-height: 1.6;
+            background-color: var(--primary-color);
+            color: #B0C4DE;
+            text-align: center;
+            padding: 2.5rem 1.8rem;
+            font-size: 0.95rem;
+            height: auto;
+            line-height: 1.6;
             transition: background-color 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
         }
-        footer.main-footer p { margin-bottom: 0.3rem; }
-        footer.main-footer strong { color: white; }
+
+        footer.main-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+        }
+
+        footer.main-footer p {
+            margin: 0;
+            max-width: 600px;
+            transition: color 0.3s;
+        }
+
+        footer.main-footer strong {
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        body.dark-mode footer.main-footer {
+            background-color: #1A1A1A;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode footer.main-footer p {
+            color: #E0E0E0;
+        }
+
+        body.dark-mode footer.main-footer strong {
+            color: #FFFFFF;
+        }
+
+        @media (max-width: 768px) {
+            footer.main-footer {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            footer.main-footer {
+                padding: 1.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
 
         .menu-toggle {
             display: none; font-size: 1.8rem; color: white;
