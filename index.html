@@ -360,14 +360,430 @@
         }
 
 
+        /* Welcome Section */
+        .welcome-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0D2F4B, #1E5A8C);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('presentacion.png') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .welcome-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 3rem;
+            background: rgba(13, 47, 75, 0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .welcome-logo {
+            width: 150px;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-title {
+            font-size: 3.5rem;
+            margin: 0 0 1rem 0;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fff, #b0c4de);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.8rem;
+            margin: 0 0 2rem 0;
+            color: #F2A900;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .welcome-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin: 0 auto 3rem;
+            max-width: 700px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn-manual {
+            display: inline-block;
+            background: linear-gradient(45deg, #F2A900, #ffc107);
+            color: #1a2942;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(242, 169, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-manual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-manual:hover::before {
+            width: 100%;
+        }
+
+        .btn-manual:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(242, 169, 0, 0.4);
+        }
+
+        .btn-manual:active {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(242, 169, 0, 0.3);
+        }
+
+        /* Footer Styles */
         footer.main-footer {
             background-color: #1a2942;
             color: #ffffff;
-            padding: 3rem 0 0;
+            padding: 4rem 0 0;
             font-size: 1rem;
-            margin-top: 4rem;
+            margin-top: 0;
             font-family: 'Nunito Sans', sans-serif;
             line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo-img {
+            width: 60px;
+            height: auto;
+            margin-right: 1rem;
+            border-radius: 8px;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            margin: 0;
+            line-height: 1.3;
+            color: white;
+        }
+
+        .footer-description {
+            color: #b0c4de;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: #b0c4de;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, #ffc107, #ff8a00);
+            color: #1a2942;
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #ffc107, #ff8a00);
+            border-radius: 2px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: #ffc107;
+            margin-top: 0.25rem;
+            font-size: 1.1rem;
+            min-width: 20px;
+        }
+
+        .contact-item a {
+            color: #b0c4de;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #ffc107;
+        }
+
+        .business-hours {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hours-item:last-child {
+            border-bottom: none;
+        }
+
+        .hours-item span:first-child {
+            color: #b0c4de;
+        }
+
+        .hours-item span:last-child {
+            color: white;
+            font-weight: 500;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 0;
+            text-align: center;
+            color: #8a9bb8;
+            font-size: 0.9rem;
+        }
+
+        /* Manual Features */
+        .manual-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: #F2A900;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .feature h4 {
+            color: white;
+            margin: 0 0 1rem 0;
+            font-size: 1.2rem;
+        }
+
+        .feature p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .manual-intro {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .manual-intro h1 {
+            font-size: 2.5rem;
+            color: #0D2F4B;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .manual-intro h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #F2A900, #ffc107);
+            border-radius: 2px;
+        }
+
+        .manual-intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-section {
+                padding: 2rem 1rem;
+            }
+
+            .welcome-content {
+                padding: 2rem 1.5rem;
+            }
+
+            
+            .welcome-title {
+                font-size: 2.2rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .welcome-description {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .btn-manual {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .manual-features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .manual-intro h1 {
+                font-size: 2rem;
+            }
+            
+            .manual-intro p {
+                font-size: 1rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .feature {
+                padding: 1.5rem 1rem;
+            }
+
+            .footer-col {
+                margin-bottom: 2.5rem;
+            }
+
+            .footer-logo {
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+            }
+
+            .footer-logo-img {
+                margin: 0 auto 1rem;
+            }
+
+            .footer-description {
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
         }
         footer.main-footer p { margin-bottom: 0.3rem; }
         footer.main-footer strong { color: white; }
@@ -621,30 +1037,62 @@
             </ul>
         </nav>
 
+        <!-- Welcome Section -->
+        <section class="welcome-section" id="welcome">
+            <div class="welcome-content">
+                <img src="LogoFaro.png" alt="Logo Faro del Río" class="welcome-logo">
+                <h1 class="welcome-title">Bienvenidos a Faro del Río</h1>
+                <h2 class="welcome-subtitle">Manual de Convivencia</h2>
+                <p class="welcome-description">
+                    Un espacio diseñado para la convivencia armónica, el respeto mutuo y el bienestar de nuestra comunidad.
+                    Este manual es su guía fundamental para una vida comunitaria enriquecedora y pacífica.
+                </p>
+                <a href="#manual" class="btn-manual">Explorar Manual</a>
+            </div>
+        </section>
+
         <main class="content-area">
-            <section id="presentacion" class="content-section active">
-                <div class="presentation-hero">
-                    <div class="presentation-image-container">
-                        <img src="presentacion.png" alt="Edificio Faro del Río">
-                    </div>
-                    <div class="presentation-text-container">
-                        <h2><i class="fas fa-landmark"></i>Bienvenidos a nuestro Manual de Convivencia</h2>
-                        <p>El Conjunto Residencial Faro del Río, una entidad de derecho privado en la ciudad de Medellín, se rige por la Constitución Política, las leyes colombianas y su Reglamento de Propiedad Horizontal. Este manual es su guía fundamental para una vida comunitaria armónica y enriquecedora.</p>
-                        <p>Nuestro objetivo principal es <strong class="highlight-rule">mejorar la calidad de vida</strong> de todos los residentes, construyendo una comunidad humana, segura y tranquila mediante la autorregulación y el respeto mutuo. El buen comportamiento nace de la convicción personal de ser mejores vecinos y ciudadanos.</p>
-                    </div>
+            <section id="manual" class="content-section active">
+                <div class="manual-intro">
+                    <h1><i class="fas fa-landmark"></i> Manual de Convivencia</h1>
+                    <p>El Conjunto Residencial Faro del Río, una entidad de derecho privado en la ciudad de Medellín, se rige por la Constitución Política, las leyes colombianas y su Reglamento de Propiedad Horizontal.</p>
+                    <p>Nuestro objetivo principal es <strong class="highlight-rule">mejorar la calidad de vida</strong> de todos los residentes, construyendo una comunidad humana, segura y tranquila mediante la autorregulación y el respeto mutuo.</p>
                 </div>
                 <div class="presentation-details">
-                    <p>Este manual, fruto del consenso y la participación activa de la comunidad, utiliza un lenguaje claro y accesible para fomentar la conciencia sobre el impacto de nuestras acciones individuales en el bienestar colectivo. Se fundamenta en valores esenciales como el <strong class="highlight-rule">respeto, la tolerancia, la amabilidad, la responsabilidad y el sentido de pertenencia</strong>.</p>
-                    <hr class="section-divider">
-                    <p>Aquí se abordan temas cruciales para la convivencia diaria: el manejo del ruido, la seguridad integral, el aseo de las áreas, el cuidado de las mascotas, el uso de los parqueaderos, el bienestar de los niños y la importancia de una comunicación efectiva. Estas normas, aprobadas por la Asamblea General de Propietarios, son de <strong class="highlight-rule">cumplimiento obligatorio</strong> para todos los residentes, propietarios y visitantes.</p>
-                    <div class="important-note-box">
-                        <h4><i class="fas fa-child-reaching"></i> Nuestros Niños, Nuestro Futuro</h4>
-                        <p>Los niños son la alegría y el futuro de nuestra comunidad. Merecen todo nuestro respeto, un buen ejemplo y una orientación constante. Su natural curiosidad requiere nuestra comprensión y cuidado permanente.</p>
-                        <ul>
-                            <li>Se debe evitar los gritos y las carreras en las zonas comunes para mantener la tranquilidad de todos.</li>
-                            <li>Es fundamental inculcarles el cuidado y el respeto por los bienes del Conjunto. Los padres son responsables por los daños que puedan ocasionar.</li>
-                            <li>Los menores de 7 años deben estar siempre acompañados por un adulto responsable dentro del hogar y en las áreas comunes.</li>
-                            <li>Se les debe enseñar el respeto por la naturaleza, por las personas mayores y por los otros niños.</li>
+                    <div class="manual-overview">
+                        <p>Este manual, fruto del consenso y la participación activa de la comunidad, utiliza un lenguaje claro y accesible para fomentar la conciencia sobre el impacto de nuestras acciones individuales en el bienestar colectivo. Se fundamenta en valores esenciales como el <strong class="highlight-rule">respeto, la tolerancia, la amabilidad, la responsabilidad y el sentido de pertenencia</strong>.</p>
+                        
+                        <div class="manual-features">
+                            <div class="feature">
+                                <i class="fas fa-volume-mute"></i>
+                                <h4>Manejo del Ruido</h4>
+                                <p>Horarios establecidos para mantener la tranquilidad de todos los residentes.</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <h4>Seguridad Integral</h4>
+                                <p>Protocolos para garantizar la seguridad de todos los residentes y visitantes.</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-paw"></i>
+                                <h4>Cuidado de Mascotas</h4>
+                                <p>Normas para la tenencia responsable de mascotas en el conjunto.</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-parking"></i>
+                                <h4>Uso de Parquederos</h4>
+                                <p>Reglamento para el uso adecuado de los espacios de parqueo.</p>
+                            </div>
+                        </div>
+
+                        <div class="important-note-box">
+                            <h4><i class="fas fa-child-reaching"></i> Nuestros Niños, Nuestro Futuro</h4>
+                            <p>Los niños son la alegría y el futuro de nuestra comunidad. Merecen todo nuestro respeto, un buen ejemplo y una orientación constante. Su natural curiosidad requiere nuestra comprensión y cuidado permanente.</p>
+                            <ul>
+                                <li>Se debe evitar los gritos y las carreras en las zonas comunes para mantener la tranquilidad de todos.</li>
+                                <li>Es fundamental inculcarles el cuidado y el respeto por los bienes del Conjunto. Los padres son responsables por los daños que puedan ocasionar.</li>
+                                <li>Los menores de 7 años deben estar siempre acompañados por un adulto responsable dentro del hogar y en las áreas comunes.</li>
+                                <li>Se les debe enseñar el respeto por la naturaleza, por las personas mayores y por los otros niños.</li>
                         </ul>
                     </div>
                     <h4><i class="fas fa-comments-dollar"></i> Una Comunicación Clara y Respetuosa</h4>
@@ -930,7 +1378,9 @@
                 <h2><i class="fas fa-user-shield"></i>8.3. Sobre la Autoridad de la Administración y los Vigilantes</h2>
                 <p>La Asamblea General de copropietarios reconoce la autoridad del Administrador, los porteros y los vigilantes del Conjunto Residencial Faro del Río para hacer cumplir las normas contenidas en este manual de convivencia.</p>
             </section>
-        </main>
+                </div>
+        </section>
+    </main>
     </div>
 
     <button class="back-to-top-button" id="backToTopBtn" aria-label="Volver Arriba">
@@ -938,43 +1388,74 @@
     </button>
 
     <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <div class="footer-logo">
-                    <img src="LogoFaro.png" alt="Logo Faro del Río" class="logo-img">
-                    <h3>Conjunto Residencial<br>Faro del Río</h3>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Logo and Description -->
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="LogoFaro.png" alt="Logo Faro del Río" class="footer-logo-img">
+                        <h3>Conjunto Residencial<br>Faro del Río</h3>
+                    </div>
+                    <p class="footer-description">Un espacio diseñado para la convivencia armónica y el bienestar de todos sus residentes.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
-                <p class="footer-description">Un espacio diseñado para la convivencia armónica y el bienestar de todos sus residentes.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook" class="social-icon">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" aria-label="Instagram" class="social-icon">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" aria-label="WhatsApp" class="social-icon">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
+
+                <!-- Contact Information -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contáctenos</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p>Calle 65 No. 56 A 60</p>
+                                <p>Medellín, Colombia</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+5757958065">+57 4 579 80 65</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:contacto@farodelrio.com">contacto@farodelrio.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Horario de Atención</h4>
+                    <div class="business-hours">
+                        <div class="hours-item">
+                            <span>Lunes - Viernes:</span>
+                            <span>8:00 AM - 5:00 PM</span>
+                        </div>
+                        <div class="hours-item">
+                            <span>Sábados:</span>
+                            <span>8:00 AM - 12:00 PM</span>
+                        </div>
+                        <div class="hours-item">
+                            <span>Domingos y festivos:</span>
+                            <span>Cerrado</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="footer-section contact-info">
-                <h4>Contáctenos</h4>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <p>Calle 65 No. 56 A 60<br>Medellín, Colombia</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <p><a href="tel:+5757958065">+57 4 579 80 65</a></p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <p><a href="mailto:contacto@farodelrio.com">contacto@farodelrio.com</a></p>
-                </div>
+            
+            <!-- Copyright -->
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Conjunto Residencial Faro del Río. Todos los derechos reservados.</p>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <span id="currentYear"></span> Conjunto Residencial Faro del Río. Todos los derechos reservados.</p>
         </div>
     </footer>
 
