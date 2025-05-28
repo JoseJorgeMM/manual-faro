@@ -361,65 +361,83 @@
 
 
         footer.main-footer {
-            background-color: #111827; /* Darker, more sophisticated background */
-            color: #9CA3AF; /* Softer text color */
+            background-color: #0A0E1A; /* Deep, modern dark blue/charcoal */
+            color: #A0AEC0;    /* Cool gray for text, good contrast */
             text-align: center;
-            padding: 3rem 1.8rem;
-            font-size: 0.9rem; /* Slightly smaller base font size */
-            line-height: 1.7;
-            transition: background-color 0.3s, color 0.3s;
+            padding: 3.5rem 2rem; /* Increased padding for a more spacious feel */
+            font-size: 0.875rem; /* Adjusted base font size for refinement */
+            line-height: 1.8;
+            transition: background-color 0.4s ease, color 0.4s ease;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 1rem; /* Increased gap for better spacing */
-            border-top: 1px solid #374151; /* Subtle top border */
+            gap: 1.25rem; /* Generous gap */
+            border-top: 1px solid #2D3748; /* Slightly more defined border */
         }
 
         footer.main-footer::before {
-            content: ''; /* Removed the gradient line for a cleaner look */
-            /* background: linear-gradient(90deg, var(--accent-color), var(--secondary-color)); */
-            /* ... other ::before styles if any were kept ... */
-            height: 0; /* Effectively hiding the previous ::before element */
+            content: '';
+            height: 0; /* Keeping this hidden */
         }
 
         footer.main-footer p {
             margin: 0;
-            max-width: 650px; /* Slightly increased max-width */
-            transition: color 0.3s;
+            max-width: 700px; /* Allowing a bit more width */
+            transition: color 0.3s ease;
         }
 
         footer.main-footer strong {
-            color: #F3F4F6; /* Brighter color for strong text */
-            font-weight: 500; /* Adjusted font-weight */
-            letter-spacing: 0.2px; /* Reduced letter-spacing for a cleaner look */
+            color: #E2E8F0; /* Lighter, clearer strong text */
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
-        /* Dark Mode specific styles for the footer, ensuring consistency */
+        /* Adding a subtle link style for potential future links in footer */
+        footer.main-footer a {
+            color: #75A4D9; /* A distinct but not overly bright link color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer.main-footer a:hover {
+            color: #A8C9EC; /* Lighter on hover */
+        }
+
+        /* Dark Mode - ensuring the footer remains consistent or adapts thoughtfully */
         body.dark-mode footer.main-footer {
-            background-color: #0F172A; /* Even darker for dark mode */
-            border-top-color: #4B5563;
+            background-color: #080B14; /* Slightly adjusted for dark mode if needed, or keep same as light */
+            border-top-color: #353F52;
         }
 
         body.dark-mode footer.main-footer p {
-            color: #A1A1AA;
+            color: #B8C3D0;
         }
 
         body.dark-mode footer.main-footer strong {
-            color: #E5E7EB;
+            color: #F0F4F8;
+        }
+
+        body.dark-mode footer.main-footer a {
+            color: #8AB4E0;
+        }
+
+        body.dark-mode footer.main-footer a:hover {
+            color: #B9D7F0;
         }
 
         @media (max-width: 768px) {
             footer.main-footer {
-                padding: 2.5rem 1.5rem;
+                padding: 3rem 1.5rem;
+                gap: 1rem;
             }
         }
 
         @media (max-width: 480px) {
             footer.main-footer {
-                padding: 2rem 1.2rem;
-                font-size: 0.85rem; /* Further adjusted for small screens */
+                padding: 2.5rem 1rem;
+                font-size: 0.825rem;
             }
         }
 
