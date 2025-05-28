@@ -263,3 +263,34 @@
         margin: 2cm;
     }
 }
+
+@media (max-width: 900px) {
+    .sidebar {
+        width: 210px;
+        padding: 1rem 0;
+    }
+    .content-container {
+        margin-left: 0;
+        width: 100%;
+    }
+    .footer-grid {
+        gap: 1.2rem;
+    }
+}
+@media (max-width: 600px) {
+    .sidebar {
+        width: 100vw;
+        border-radius: 0;
+        padding: 0.5rem 0;
+    }
+    .sidebar-header, .search-container.mobile-search {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .content-section {
+        padding: 1.2rem 0.5rem;
+    }
+    .footer-grid {
+        gap: 0.5rem;
+    }
+}
