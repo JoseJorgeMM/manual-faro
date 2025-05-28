@@ -2,11 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual de Convivencia Interactivo - Faro del Río</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0A4D68">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Manual de Convivencia - Faro del Río</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -20,6 +22,7 @@
             --text-muted: #5C5C5C;
             --border-color: #DDE2E1;
             --sidebar-width: 290px;
+            --sidebar-collapsed-width: 70px;
             --header-height: 80px;
             --footer-height: 120px;
             --border-radius: 8px;
@@ -140,17 +143,23 @@
             --border-radius: 8px;
         }
         
+        :root {
+            --vh: 1vh;
+        }
+        
         nav.sidebar {
             width: var(--sidebar-width);
             background-color: var(--card-bg);
             padding: 1.8rem 0;
             height: calc(100vh - var(--header-height));
+            height: calc(calc(var(--vh, 1vh) * 100) - var(--header-height)); /* Mobile viewport height fix */
             overflow-y: auto;
             position: fixed; left: 0; top: var(--header-height);
             transition: all 0.3s ease-in-out;
             z-index: 999;
             border-right: 1px solid var(--border-color);
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            -webkit-overflow-scrolling: touch;
         }
         
         .sidebar.collapsed {
@@ -193,6 +202,7 @@
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
         }
         
         .sidebar-toggle:hover {
@@ -221,6 +231,8 @@
             letter-spacing: 0.5px;
             position: relative;
             white-space: nowrap;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            touch-action: manipulation; /* Optimize for touch */
         }
         nav.sidebar ul li a i {
             margin-right: 15px; width: 22px; text-align: center;
@@ -877,14 +889,24 @@
             .presentation-text-container h2 i { font-size: 2.2rem;}
         }
         @media (max-width: 768px) { /* Mobile */
-            .menu-toggle { display: flex; align-items: center; justify-content: center; margin-left: 0.5rem;}
+            .menu-toggle { display: flex; align-items: center; justify-content: center; margin-left: 0.5rem; font-size: 1.5rem; }
             .header-controls { flex-grow: 1; justify-content: flex-end; }
             .search-container { margin-right: 0.5rem; }
             .search-container input[type="search"] { width: 150px; font-size: 0.85rem; padding: 0.5rem 0.7rem 0.5rem 2.2rem;}
             .search-container input[type="search"]:focus { width: 180px; }
             .theme-toggle-button { font-size: 1.3rem; margin-right: 0; }
-            nav.sidebar { transform: translateX(-100%); box-shadow: 5px 0 15px rgba(0,0,0,0.2); z-index: 1001; }
-            nav.sidebar.open { transform: translateX(0); }
+            nav.sidebar {
+                transform: translateX(-100%);
+                width: var(--sidebar-width);
+                background-color: var(--card-bg);
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+                z-index: 1001;
+                height: 100%; /* Full height on mobile */
+                top: 0; /* Start from the top of the screen */
+                padding-top: calc(var(--header-height) + 1rem); /* Add padding to account for header */
+                overscroll-behavior: contain; /* Prevent scroll chaining */
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            }
             main.content-area { margin-left: 0; padding: 1.5rem; }
             .content-section:not(#presentacion) { padding: 2rem 1.5rem; }
             .content-section:not(#presentacion) h2 { font-size: 1.8rem; }
@@ -895,6 +917,13 @@
             .presentation-text-container h2 i { font-size: 1.8rem; }
             .presentation-text-container p { font-size: 1rem; }
             .presentation-details { padding: 1.5rem; }
+            
+            /* Improve tap targets for mobile */
+            .nav-link { padding: 1rem 1.8rem; }
+            .nav-link i { font-size: 1.3rem; }
+            
+            /* Prevent content from being hidden under fixed header */
+            .content-section { padding-bottom: 60px; }
         }
          @media (max-width: 480px) { /* Small Mobile */
             header.main-header .logo-text { font-size: 1.3rem; }
@@ -1061,34 +1090,11 @@
                     <li>El retiro de un vehículo por parte de un no propietario requiere una autorización escrita.</li>
                     <li>Las motos deben estacionarse únicamente en los parqueaderos designados para motos. No deben ubicarse en zonas comunes, zonas verdes o andenes.</li>
                     <li>Las vías son para el tránsito vehicular; no deben ser obstaculizadas.</li>
-                    <li>Está prohibido usar las zonas comunes para realizar compraventas o negocios de cualquier índole.</li>
+                    <li>Está prohibido usar las zonas comunes como baño público.</li>
+                    <li>El Conjunto es de todos; por lo tanto, los actos que ocurran en las zonas comunes son competencia y responsabilidad de todos los propietarios.</li>
+                    <li>La conservación y el mantenimiento de estas áreas dependen del pago oportuno de las cuotas de administración.</li>
+                    <li>El propietario que arrienda o cede el uso de su apartamento, cede también el derecho al uso del área social. El propietario solo podrá usarla como invitado de un residente.</li>
                 </ol>
-                <p class="important-note-box"><strong>Capacidad de Parqueo: El Conjunto cuenta con 18 lugares disponibles.</strong></p>
-                <ol start="16"> 
-                    <li>No se deben lavar vehículos en el área del parqueadero.</li>
-                    <li>Se debe parquear dentro de la zona delimitada, sin invadir las zonas peatonales o de tránsito.</li>
-                    <li>Los propietarios deben tener su propia póliza vehicular todo riesgo vigente.</li>
-                    <li>Cualquier daño a las instalaciones del Conjunto debe ser informado al administrador. Si hay renuencia a responder, se acudirá a las autoridades competentes.</li>
-                    <li>Se deben reparar inmediatamente los escapes de gasolina o aceite de los vehículos.</li>
-                    <li><strong class="highlight-rule">Los propietarios que NO residen en el conjunto NO pueden parquear sus vehículos.</strong></li>
-                    <li><strong class="highlight-rule">Se permite UN SOLO vehículo por apartamento.</strong></li>
-                    <li><strong class="highlight-rule">El vehículo debe ser conducido por un RESIDENTE del conjunto.</strong></li>
-                    <li>Está prohibido dejar vehículos parqueados de forma permanente e indefinida.</li>
-                    <li>No se debe usar el parqueadero para reparaciones extensas (salvo fuerza mayor) o para parquear vehículos chocados o en desuso (estos deben retirarse en un máximo de 10 días).</li>
-                    <li><strong class="highlight-rule">Dejar un vehículo inmóvil por más de 48 horas requiere comunicar a la administración (el motivo será evaluado).</strong></li>
-                </ol>
-                <div class="important-note-box">
-                    <p><strong class="highlight-rule">En caso de viaje o ausencia prolongada: se debe dejar un contacto para mover el vehículo en caso de emergencia.</strong></p>
-                </div>
-                <ol start="27">
-                    <li>Los parqueaderos comunes son exclusivamente para parquear vehículos.</li>
-                    <li><strong class="highlight-rule">Para usar los parqueaderos comunes: es indispensable estar a Paz y Salvo con la administración y no tener sanciones vigentes.</strong></li>
-                    <li>Está prohibido el ingreso de Taxis (excepto si el residente es el propietario del taxi, para el traslado de enfermos, o para trasteos debidamente justificados).</li>
-                    <li><strong class="highlight-rule">Cualquier daño o choque en el parqueadero debe ser notificado. El causante debe hacerse cargo INMEDIATAMENTE de los costos.</strong></li>
-                    <li>Los propietarios deben entregar una copia de la matrícula de sus vehículos a los porteros para el censo vehicular.</li>
-                    <li>Estas normas aplican a todos por igual (copropietarios, residentes, visitantes y personal de servicio).</li>
-                </ol>
-                <p>Los casos no previstos en este manual se regirán por las leyes de tránsito y civiles vigentes en Colombia.</p>
             </section>
 
             <section id="zonas-comunes" class="content-section">
@@ -1351,7 +1357,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="copyright">© <span id="currentYear"></span> <strong>Conjunto Residencial Faro del Río</strong> - Todos los derechos reservados</p>
+            <p class="copyright">  <strong>Conjunto Residencial Faro del Río</strong> - Todos los derechos reservados</p>
         </div>
     </footer>
 
@@ -1463,6 +1469,18 @@
                 showSection('#presentacion', true); // Default to presentation
                 // history.replaceState(null, null, '#presentacion'); // Update URL without new history entry
             }
+            
+            // Add viewport height fix for mobile browsers
+            function setMobileViewportHeight() {
+                // First we get the viewport height and multiply it by 1% to get a value for a vh unit
+                let vh = window.innerHeight * 0.01;
+                // Then we set the value in the --vh custom property to the root of the document
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            
+            // Set the height initially and on resize
+            setMobileViewportHeight();
+            window.addEventListener('resize', setMobileViewportHeight);
 
             window.addEventListener('popstate', function() {
                 clearSearchHighlights(); // Clear highlights on back/forward
@@ -1474,8 +1492,6 @@
 
             // --- SIDEBAR TOGGLE FUNCTIONALITY ---
             const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebar = document.querySelector('.sidebar');
-            const contentArea = document.querySelector('.content-area');
             
             // Function to toggle sidebar
             function toggleSidebar() {
@@ -1483,8 +1499,27 @@
                 contentArea.classList.toggle('sidebar-collapsed');
                 
                 // Save state to localStorage
-                const isCollapsed = sidebar.classList.contains('collapsed');
-                localStorage.setItem('sidebarCollapsed', isCollapsed);
+                const savedState = localStorage.getItem('sidebarCollapsed');
+                const isMobile = window.innerWidth <= 768;
+                
+                if (isMobile) {
+                    // On mobile, always start with sidebar closed
+                    sidebar.classList.remove('open');
+                    if (menuToggle) {
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                } else {
+                    // On desktop, respect saved preference
+                    if (savedState === 'true') {
+                        sidebar.classList.add('collapsed');
+                        contentArea.classList.add('sidebar-collapsed');
+                    } else {
+                        // Default state (open)
+                        sidebar.classList.remove('collapsed');
+                        contentArea.classList.remove('sidebar-collapsed');
+                    }
+                }
             }
             
             // Add click event to toggle button
@@ -1497,15 +1532,27 @@
             
             // Check for saved preference or set default
             const savedState = localStorage.getItem('sidebarCollapsed');
-            if (savedState === 'true') {
-                sidebar.classList.add('collapsed');
-                contentArea.classList.add('sidebar-collapsed');
-            } else if (savedState === null) {
-                // Default state (open)
-                sidebar.classList.remove('collapsed');
-                contentArea.classList.remove('sidebar-collapsed');
-            }
+            const isMobile = window.innerWidth <= 768;
             
+            if (isMobile) {
+                // On mobile, always start with sidebar closed
+                sidebar.classList.remove('open');
+                if (menuToggle) {
+                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            } else {
+                // On desktop, respect saved preference
+                if (savedState === 'true') {
+                    sidebar.classList.add('collapsed');
+                    contentArea.classList.add('sidebar-collapsed');
+                } else {
+                    // Default state (open)
+                    sidebar.classList.remove('collapsed');
+                    contentArea.classList.remove('sidebar-collapsed');
+                }
+            }
+
             // --- MOBILE MENU TOGGLE ---
             if (menuToggle) {
                 menuToggle.addEventListener('click', function(e) {
@@ -1513,21 +1560,28 @@
                     const isOpen = sidebar.classList.toggle('open');
                     this.setAttribute('aria-expanded', isOpen.toString());
                     this.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                    
+                    // Prevent body scrolling when sidebar is open on mobile
+                    if (isOpen && window.innerWidth <= 768) {
+                        document.body.style.overflow = 'hidden';
+                        
+                        // Close sidebar if clicking outside on mobile
+                        document.addEventListener('click', function(event) {
+                            if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                                // Check if the click is outside the sidebar AND not on the toggle button
+                                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                                    sidebar.classList.remove('open');
+                                    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                                    menuToggle.setAttribute('aria-expanded', 'false');
+                                    document.body.style.overflow = ''; // Re-enable scrolling
+                                }
+                            }
+                        });
+                    } else {
+                        document.body.style.overflow = '';
+                    }
                 });
             }
-            
-            // Close sidebar if clicking outside on mobile
-            document.addEventListener('click', function(event) {
-                if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
-                    // Check if the click is outside the sidebar AND not on the toggle button
-                    if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
-                        sidebar.classList.remove('open');
-                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                        menuToggle.setAttribute('aria-expanded', 'false');
-                    }
-                }
-            });
-            
             // Adjust content area margin when sidebar is toggled
             function updateContentMargin() {
                 if (window.innerWidth > 768) {
@@ -1652,6 +1706,21 @@
                     contentArea.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             }
+            
+            // Add passive event listeners for better performance on mobile
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            document.addEventListener('touchmove', function() {}, {passive: true});
+            
+            // Double tap to zoom prevention
+            let lastTap = 0;
+            document.addEventListener('touchend', function(e) {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+                if (tapLength < 300 && tapLength > 0) {
+                    e.preventDefault();
+                }
+                lastTap = currentTime;
+            });
         });
     </script>
 
