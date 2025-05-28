@@ -176,33 +176,45 @@
             transition: background-color 0.3s;
         }
         
-        /* --- FOOTER STYLES --- */
+        /* --- MODERN FOOTER STYLES --- */
         .main-footer {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: rgba(255, 255, 255, 0.9);
             padding: 0;
-            min-height: var(--footer-height);
             width: 100%;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
+            position: relative;
+            overflow: hidden;
             font-size: 0.95rem;
             line-height: 1.6;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .main-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
         }
         
         .footer-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            padding: 2rem 3rem;
+            padding: 4rem 3rem 2.5rem;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
         
         .footer-column {
             flex: 1;
-            min-width: 200px;
-            margin-bottom: 1rem;
-            padding-right: 2rem;
+            min-width: 250px;
+            margin-bottom: 2rem;
+            padding: 0 1.5rem;
         }
         
         .footer-brand {
@@ -211,86 +223,260 @@
             align-items: flex-start;
         }
         
+        .footer-logo-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .footer-logo-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
         .footer-logo {
-            height: 50px;
+            height: 45px;
             width: auto;
-            margin-bottom: 0.8rem;
-            border-radius: var(--border-radius);
+            display: block;
         }
         
         .footer-brand h3 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin: 0 0 0.3rem 0;
+            margin: 0 0 0.5rem 0;
             color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-brand h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-color);
         }
         
         .footer-tagline {
-            color: var(--accent-color);
-            font-style: italic;
-            margin-top: 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            margin: 0.5rem 0 1.5rem;
+            font-weight: 400;
+            line-height: 1.6;
         }
         
-        .footer-column h4 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
+        /* Contact Section */
+        .footer-contact h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
             color: white;
             font-weight: 600;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
+            position: relative;
             display: inline-block;
+            padding-bottom: 0.5rem;
         }
         
-        .footer-column h4 i {
-            margin-right: 0.5rem;
+        .footer-contact h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        
+        .footer-address {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-style: normal;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            transform: translateX(5px);
+        }
+        
+        .contact-icon {
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+            transition: color 0.2s;
+        }
+        
+        .contact-link:hover {
             color: var(--accent-color);
         }
         
-        .footer-column p {
-            margin: 0.5rem 0;
+        .contact-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
         }
         
-        .footer-links ul {
+        /* Quick Links */
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        
+        .footer-nav {
             list-style: none;
             padding: 0;
             margin: 0;
         }
         
-        .footer-links ul li {
-            margin-bottom: 0.7rem;
+        .footer-nav li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 0;
+            transition: padding-left 0.3s ease;
         }
         
-        .footer-links ul li a {
+        .footer-nav li:hover {
+            padding-left: 5px;
+        }
+        
+        .footer-nav li a {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
+            display: flex;
+            align-items: center;
             transition: color 0.2s, transform 0.2s;
-            display: inline-block;
         }
         
-        .footer-links ul li a:hover {
+        .footer-nav li a i {
+            margin-right: 10px;
             color: var(--accent-color);
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-nav li a:hover {
+            color: white;
             transform: translateX(3px);
         }
         
+        .footer-nav li a:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Social Icons */
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(242, 169, 0, 0.3);
+        }
+        
+        /* Footer Bottom */
         .footer-bottom {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 1rem 3rem;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 1.2rem 3rem;
             text-align: center;
             font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .copyright {
             margin: 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
         }
         
+        .copyright strong {
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Dark Mode Styles */
         body.dark-mode .main-footer {
-            background-color: #222222;
-            border-top: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         body.dark-mode .footer-bottom {
-            background-color: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.25);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        
+        body.dark-mode .footer-logo-container {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        body.dark-mode .social-icon {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        body.dark-mode .contact-icon {
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .content-section {
@@ -973,25 +1159,50 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-column footer-brand">
-                <img src="LogoFaro.png" alt="Logo Faro del Río" class="footer-logo">
+                <div class="footer-logo-container">
+                    <img src="LogoFaro.png" alt="Logo Faro del Río" class="footer-logo">
+                </div>
                 <h3>Faro del Río</h3>
                 <p class="footer-tagline">Comunidad, Armonía y Convivencia</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
             <div class="footer-column footer-contact">
                 <h4><i class="fas fa-map-marker-alt"></i> Ubicación</h4>
-                <p>Calle 65 No. 56 A 60</p>
-                <p>Medellín – Colombia</p>
-                <h4><i class="fas fa-phone"></i> Contacto</h4>
-                <p>Teléfono: 579 80 65</p>
-                <p>Email: admin@faroderio.com</p>
+                <p class="footer-address">Calle 65 No. 56 A 60<br>Medellín – Colombia</p>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <a href="tel:+573183580529" class="contact-link">+57 318 358 0529</a>
+                        <span class="contact-label">Línea directa</span>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <a href="mailto:farodelrio@hotmail.com" class="contact-link">farodelrio@hotmail.com</a>
+                        <span class="contact-label">Escríbenos</span>
+                    </div>
+                </div>
             </div>
             <div class="footer-column footer-links">
                 <h4><i class="fas fa-link"></i> Enlaces Rápidos</h4>
-                <ul>
-                    <li><a href="#presentacion">Inicio</a></li>
-                    <li><a href="#justificacion">Justificación</a></li>
-                    <li><a href="#derechos-deberes">Derechos y Deberes</a></li>
-                    <li><a href="#sanciones-no-pecuniarias">Sanciones</a></li>
+                <ul class="footer-nav">
+                    <li><a href="#presentacion"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                    <li><a href="#justificacion"><i class="fas fa-chevron-right"></i> Justificación</a></li>
+                    <li><a href="#derechos-deberes"><i class="fas fa-chevron-right"></i> Derechos y Deberes</a></li>
+                    <li><a href="#sanciones-no-pecuniarias"><i class="fas fa-chevron-right"></i> Sanciones</a></li>
+                    <li><a href="#ingreso-visitantes"><i class="fas fa-chevron-right"></i> Ingreso de Visitantes</a></li>
+                    <li><a href="#vehiculo-vias"><i class="fas fa-chevron-right"></i> Vehículos y Vías</a></li>
                 </ul>
             </div>
         </div>
