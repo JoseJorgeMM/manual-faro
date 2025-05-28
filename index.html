@@ -361,10 +361,13 @@
 
 
         footer.main-footer {
-            background-color: var(--primary-color); color: #B0C4DE;
-            text-align: center; padding: 1.8rem; font-size: 0.95rem;
-            height: auto; line-height: 1.6;
-            transition: background-color 0.3s;
+            background-color: #1a2942;
+            color: #ffffff;
+            padding: 3rem 0 0;
+            font-size: 1rem;
+            margin-top: 4rem;
+            font-family: 'Nunito Sans', sans-serif;
+            line-height: 1.6;
         }
         footer.main-footer p { margin-bottom: 0.3rem; }
         footer.main-footer strong { color: white; }
@@ -440,6 +443,136 @@
             .back-to-top-button { width: 45px; height: 45px; font-size: 1.3rem; bottom: 20px; right: 20px;}
             .presentation-text-container h2 { font-size: 1.8rem; }
          }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+            gap: 4rem;
+        }
+        .footer-section h4 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin: 0 0 1.5rem 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #ffc107, #ff8a00);
+            border-radius: 2px;
+        }
+        .footer-description {
+            color: #b0c4de;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .footer-section {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 0;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .footer-logo .logo-img {
+            height: 50px;
+            width: auto;
+            margin-right: 15px;
+            border-radius: 8px;
+        }
+        .footer-logo h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.3;
+        }
+        .footer-section a {
+            color: #b0c4de;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .footer-section a:hover {
+            color: #ffc107;
+            text-decoration: none;
+        }
+        .social-links {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .social-icon {
+            background-color: #1a2942;
+            color: #ffffff;
+            padding: 0.5rem 0.8rem;
+            border-radius: 50%;
+            border: 1px solid #1a2942;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: linear-gradient(135deg, #ffc107, #ff8a00);
+            color: #1a2942;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+            border-color: transparent;
+        }
+        .contact-info {
+            margin-top: 2rem;
+        }
+        .contact-item {
+            margin-bottom: 1.5rem;
+        }
+        .contact-item i {
+            margin-right: 0.5rem;
+        }
+        .footer-bottom {
+            background-color: #151b2c;
+            padding: 1.25rem 1.5rem;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        @media (max-width: 992px) {
+            .footer-content {
+                padding: 0 2rem 3rem;
+                gap: 3rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .footer-section {
+                flex: 100%;
+                text-align: left;
+            }
+            .footer-content {
+                padding: 0 1.5rem 2.5rem;
+            }
+            .footer-section h4::after {
+                left: 0;
+                transform: none;
+            }
+            .social-links {
+                justify-content: flex-start;
+            }
+            .footer-bottom {
+                padding: 1.25rem 1.5rem;
+                font-size: 0.85rem;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -588,34 +721,11 @@
                     <li>El retiro de un vehículo por parte de un no propietario requiere una autorización escrita.</li>
                     <li>Las motos deben estacionarse únicamente en los parqueaderos designados para motos. No deben ubicarse en zonas comunes, zonas verdes o andenes.</li>
                     <li>Las vías son para el tránsito vehicular; no deben ser obstaculizadas.</li>
-                    <li>Está prohibido usar las zonas comunes para realizar compraventas o negocios de cualquier índole.</li>
+                    <li>Está prohibido usar las zonas comunes como baño público.</li>
+                    <li>El Conjunto es de todos; por lo tanto, los actos que ocurran en las zonas comunes son competencia y responsabilidad de todos los propietarios.</li>
+                    <li>La conservación y el mantenimiento de estas áreas dependen del pago oportuno de las cuotas de administración.</li>
+                    <li>El propietario que arrienda o cede el uso de su apartamento, cede también el derecho al uso del área social. El propietario solo podrá usarla como invitado de un residente.</li>
                 </ol>
-                <p class="important-note-box"><strong>Capacidad de Parqueo: El Conjunto cuenta con 18 lugares disponibles.</strong></p>
-                <ol start="16"> 
-                    <li>No se deben lavar vehículos en el área del parqueadero.</li>
-                    <li>Se debe parquear dentro de la zona delimitada, sin invadir las zonas peatonales o de tránsito.</li>
-                    <li>Los propietarios deben tener su propia póliza vehicular todo riesgo vigente.</li>
-                    <li>Cualquier daño a las instalaciones del Conjunto debe ser informado al administrador. Si hay renuencia a responder, se acudirá a las autoridades competentes.</li>
-                    <li>Se deben reparar inmediatamente los escapes de gasolina o aceite de los vehículos.</li>
-                    <li><strong class="highlight-rule">Los propietarios que NO residen en el conjunto NO pueden parquear sus vehículos.</strong></li>
-                    <li><strong class="highlight-rule">Se permite UN SOLO vehículo por apartamento.</strong></li>
-                    <li><strong class="highlight-rule">El vehículo debe ser conducido por un RESIDENTE del conjunto.</strong></li>
-                    <li>Está prohibido dejar vehículos parqueados de forma permanente e indefinida.</li>
-                    <li>No se debe usar el parqueadero para reparaciones extensas (salvo fuerza mayor) o para parquear vehículos chocados o en desuso (estos deben retirarse en un máximo de 10 días).</li>
-                    <li><strong class="highlight-rule">Dejar un vehículo inmóvil por más de 48 horas requiere comunicar a la administración (el motivo será evaluado).</strong></li>
-                </ol>
-                <div class="important-note-box">
-                    <p><strong class="highlight-rule">En caso de viaje o ausencia prolongada: se debe dejar un contacto para mover el vehículo en caso de emergencia.</strong></p>
-                </div>
-                <ol start="27">
-                    <li>Los parqueaderos comunes son exclusivamente para parquear vehículos.</li>
-                    <li><strong class="highlight-rule">Para usar los parqueaderos comunes: es indispensable estar a Paz y Salvo con la administración y no tener sanciones vigentes.</strong></li>
-                    <li>Está prohibido el ingreso de Taxis (excepto si el residente es el propietario del taxi, para el traslado de enfermos, o para trasteos debidamente justificados).</li>
-                    <li><strong class="highlight-rule">Cualquier daño o choque en el parqueadero debe ser notificado. El causante debe hacerse cargo INMEDIATAMENTE de los costos.</strong></li>
-                    <li>Los propietarios deben entregar una copia de la matrícula de sus vehículos a los porteros para el censo vehicular.</li>
-                    <li>Estas normas aplican a todos por igual (copropietarios, residentes, visitantes y personal de servicio).</li>
-                </ol>
-                <p>Los casos no previstos en este manual se regirán por las leyes de tránsito y civiles vigentes en Colombia.</p>
             </section>
 
             <section id="zonas-comunes" class="content-section">
@@ -830,37 +940,41 @@
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Conjunto Residencial Faro del Río</h3>
-                <p>Un espacio diseñado para la convivencia armónica y el bienestar de todos sus residentes.</p>
+                <div class="footer-logo">
+                    <img src="LogoFaro.png" alt="Logo Faro del Río" class="logo-img">
+                    <h3>Conjunto Residencial<br>Faro del Río</h3>
+                </div>
+                <p class="footer-description">Un espacio diseñado para la convivencia armónica y el bienestar de todos sus residentes.</p>
                 <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Facebook" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="WhatsApp" class="social-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
                 </div>
             </div>
-            <div class="footer-section">
-                <h4>Contacto</h4>
-                <p><i class="fas fa-map-marker-alt"></i> Calle 65 No. 56 A 60, Medellín, Colombia</p>
-                <p><i class="fas fa-phone"></i> <a href="tel:+5757958065">+57 4 579 80 65</a></p>
-                <p><i class="fas fa-envelope"></i> <a href="mailto:contacto@farodelrio.com">contacto@farodelrio.com</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>Enlaces Rápidos</h4>
-                <ul>
-                    <li><a href="#presentacion">Inicio</a></li>
-                    <li><a href="#normas">Normas de Convivencia</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                    <li><a href="#">Preguntas Frecuentes</a></li>
-                </ul>
+            <div class="footer-section contact-info">
+                <h4>Contáctenos</h4>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Calle 65 No. 56 A 60<br>Medellín, Colombia</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p><a href="tel:+5757958065">+57 4 579 80 65</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p><a href="mailto:contacto@farodelrio.com">contacto@farodelrio.com</a></p>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; <span id="currentYear"></span> Conjunto Residencial Faro del Río. Todos los derechos reservados.</p>
-            <div class="footer-legal">
-                <a href="#">Términos y Condiciones</a>
-                <span>|</span>
-                <a href="#">Política de Privacidad</a>
-            </div>
         </div>
     </footer>
 
