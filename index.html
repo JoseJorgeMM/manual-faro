@@ -21,7 +21,7 @@
             --border-color: #DDE2E1;
             --sidebar-width: 290px;
             --header-height: 80px;
-            --footer-height: 70px;
+            --footer-height: 120px;
             --border-radius: 8px;
             --box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
             --search-highlight-bg: #FFF9C4;
@@ -174,6 +174,123 @@
             background-color: var(--light-bg);
             min-height: calc(100vh - var(--header-height) - var(--footer-height));
             transition: background-color 0.3s;
+        }
+        
+        /* --- FOOTER STYLES --- */
+        .main-footer {
+            background-color: var(--primary-color);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0;
+            min-height: var(--footer-height);
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 2rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+        }
+        
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .footer-logo {
+            height: 50px;
+            width: auto;
+            margin-bottom: 0.8rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .footer-brand h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 0 0 0.3rem 0;
+            color: white;
+        }
+        
+        .footer-tagline {
+            color: var(--accent-color);
+            font-style: italic;
+            margin-top: 0;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .footer-column h4 i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        .footer-column p {
+            margin: 0.5rem 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.7rem;
+        }
+        
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--accent-color);
+            transform: translateX(3px);
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 1rem 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            margin: 0;
+        }
+        
+        body.dark-mode .main-footer {
+            background-color: #222222;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        body.dark-mode .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.3);
         }
 
         .content-section {
@@ -360,77 +477,31 @@
         }
 
 
-        footer.main-footer {
-            background-color: #0A0E1A; /* Deep, modern dark blue/charcoal */
-            color: #A0AEC0;    /* Cool gray for text, good contrast */
-            text-align: center;
-            padding: 3.5rem 2rem; /* Increased padding for a more spacious feel */
-            font-size: 0.875rem; /* Adjusted base font size for refinement */
-            line-height: 1.8;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1.25rem; /* Generous gap */
-            border-top: 1px solid #2D3748; /* Slightly more defined border */
-        }
-
-        footer.main-footer::before {
-            content: '';
-            height: 0; /* Keeping this hidden */
-        }
-
-        footer.main-footer p {
-            margin: 0;
-            max-width: 700px; /* Allowing a bit more width */
-            transition: color 0.3s ease;
-        }
-
-        footer.main-footer strong {
-            color: #E2E8F0; /* Lighter, clearer strong text */
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-
-        /* Adding a subtle link style for potential future links in footer */
-        footer.main-footer a {
-            color: #75A4D9; /* A distinct but not overly bright link color */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer.main-footer a:hover {
-            color: #A8C9EC; /* Lighter on hover */
-        }
-
-        /* Dark Mode - ensuring the footer remains consistent or adapts thoughtfully */
-        body.dark-mode footer.main-footer {
-            background-color: #080B14; /* Slightly adjusted for dark mode if needed, or keep same as light */
-            border-top-color: #353F52;
-        }
-
-        body.dark-mode footer.main-footer p {
-            color: #B8C3D0;
-        }
-
-        body.dark-mode footer.main-footer strong {
-            color: #F0F4F8;
-        }
-
-        body.dark-mode footer.main-footer a {
-            color: #8AB4E0;
-        }
-
-        body.dark-mode footer.main-footer a:hover {
-            color: #B9D7F0;
-        }
+        /* Media queries for responsive design */
 
         @media (max-width: 768px) {
-            footer.main-footer {
-                padding: 3rem 1.5rem;
-                gap: 1rem;
+            .main-footer {
+                padding: 0;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+            
+            .footer-column {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 1.5rem;
+                text-align: center;
+            }
+            
+            .footer-brand {
+                align-items: center;
+            }
+            
+            .footer-bottom {
+                padding: 1rem;
             }
         }
 
@@ -900,8 +971,33 @@
     </button>
 
     <footer class="main-footer">
-        <p><strong>Conjunto Residencial Faro del Río</strong> © <span id="currentYear"></span></p>
-        <p>Calle 65 No. 56 A 60 | Teléfono: 579 80 65 | Medellín – Colombia</p>
+        <div class="footer-container">
+            <div class="footer-column footer-brand">
+                <img src="LogoFaro.png" alt="Logo Faro del Río" class="footer-logo">
+                <h3>Faro del Río</h3>
+                <p class="footer-tagline">Comunidad, Armonía y Convivencia</p>
+            </div>
+            <div class="footer-column footer-contact">
+                <h4><i class="fas fa-map-marker-alt"></i> Ubicación</h4>
+                <p>Calle 65 No. 56 A 60</p>
+                <p>Medellín – Colombia</p>
+                <h4><i class="fas fa-phone"></i> Contacto</h4>
+                <p>Teléfono: 579 80 65</p>
+                <p>Email: admin@faroderio.com</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h4><i class="fas fa-link"></i> Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#presentacion">Inicio</a></li>
+                    <li><a href="#justificacion">Justificación</a></li>
+                    <li><a href="#derechos-deberes">Derechos y Deberes</a></li>
+                    <li><a href="#sanciones-no-pecuniarias">Sanciones</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">© <span id="currentYear"></span> <strong>Conjunto Residencial Faro del Río</strong> - Todos los derechos reservados</p>
+        </div>
     </footer>
 
     <script>
