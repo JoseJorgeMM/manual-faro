@@ -361,68 +361,65 @@
 
 
         footer.main-footer {
-            background-color: var(--primary-color);
-            color: #B0C4DE;
+            background-color: #111827; /* Darker, more sophisticated background */
+            color: #9CA3AF; /* Softer text color */
             text-align: center;
-            padding: 2.5rem 1.8rem;
-            font-size: 0.95rem;
-            height: auto;
-            line-height: 1.6;
-            transition: background-color 0.3s;
+            padding: 3rem 1.8rem;
+            font-size: 0.9rem; /* Slightly smaller base font size */
+            line-height: 1.7;
+            transition: background-color 0.3s, color 0.3s;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            gap: 1rem; /* Increased gap for better spacing */
+            border-top: 1px solid #374151; /* Subtle top border */
         }
 
         footer.main-footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            content: ''; /* Removed the gradient line for a cleaner look */
+            /* background: linear-gradient(90deg, var(--accent-color), var(--secondary-color)); */
+            /* ... other ::before styles if any were kept ... */
+            height: 0; /* Effectively hiding the previous ::before element */
         }
 
         footer.main-footer p {
             margin: 0;
-            max-width: 600px;
+            max-width: 650px; /* Slightly increased max-width */
             transition: color 0.3s;
         }
 
         footer.main-footer strong {
-            color: white;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            color: #F3F4F6; /* Brighter color for strong text */
+            font-weight: 500; /* Adjusted font-weight */
+            letter-spacing: 0.2px; /* Reduced letter-spacing for a cleaner look */
         }
 
+        /* Dark Mode specific styles for the footer, ensuring consistency */
         body.dark-mode footer.main-footer {
-            background-color: #1A1A1A;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+            background-color: #0F172A; /* Even darker for dark mode */
+            border-top-color: #4B5563;
         }
 
         body.dark-mode footer.main-footer p {
-            color: #E0E0E0;
+            color: #A1A1AA;
         }
 
         body.dark-mode footer.main-footer strong {
-            color: #FFFFFF;
+            color: #E5E7EB;
         }
 
         @media (max-width: 768px) {
             footer.main-footer {
-                padding: 2rem 1.5rem;
+                padding: 2.5rem 1.5rem;
             }
         }
 
         @media (max-width: 480px) {
             footer.main-footer {
-                padding: 1.8rem 1.2rem;
-                font-size: 0.9rem;
+                padding: 2rem 1.2rem;
+                font-size: 0.85rem; /* Further adjusted for small screens */
             }
         }
 
